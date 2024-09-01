@@ -9,13 +9,22 @@ import './App.css'
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+  
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('token');
+  };
+
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={ isLoggedIn } />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login onLogin={handleLogin}/>} />
           {/* ... other routes */}
         </Routes>
       </Router>
