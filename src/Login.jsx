@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, setUser }) => {
     const [ formData, setFormData ] = useState({ email: "" });
     const [ error, setError ] = useState(null);
     const navigate = useNavigate();
@@ -33,11 +33,14 @@ const Login = ({ onLogin }) => {
                 const { token, user } = await response.json();
                 console.log('User logged in successfully:', user, token);
 
-                // Store the token (e.g., in local storage)
+                // Stores the token (e.g., in local storage)
                 localStorage.setItem('token', token);
 
                 // Update application state (call onLogin prop)
                 onLogin();
+
+                // Update user state (adds user object to state)
+                setUser();
 
                 // Redirect to the home page ('/')
                 navigate('/');

@@ -8,6 +8,7 @@ import './App.css'
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ user, setUser ] = useState(null);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -22,9 +23,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} user={user}/>} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login onLogin={handleLogin}/>} />
+          <Route path="/login" element={<Login onLogin={handleLogin} setUser={setUser}/>} />
           {/* ... other routes */}
         </Routes>
       </Router>
