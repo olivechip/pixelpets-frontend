@@ -7,8 +7,6 @@ import Login from './Login';
 import Navbar from './Navbar';
 import NotFound from './NotFound';
 
-import './App.css';
-
 function App() {
   const { isLoggedIn } = useSelector(state => state.user);
 
