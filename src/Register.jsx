@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from './redux/store';
 
-const Register = (props) => {
+const Register = () => {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
     });
     const [error, setError] = useState(null);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(data => ({
-        ...data,
-        [name]: value
+            ...data,
+            [name]: value
         }));
     };
 
@@ -36,26 +40,23 @@ const Register = (props) => {
                 })
             });
 
-        if (response.ok) {
-            const newUser = await response.json();
-            console.log('User registered successfully:', newUser);
+            if (response.ok) {
+                const newUser = await response.json();
+                console.log('User registered successfully:', newUser);
 
-            // Store the token (e.g., in local storage)
-            localStorage.setItem('token', token);
+                // Stores JWT, updates Redux user store, navigate back Home
+                localStorage.setItem('token', token);
+                dispatch(register(user));
+                navigate('/');
 
-            // Update application state (call onLogin prop)
-            onLogin();
-
-            // Redirect to the home page ('/')
-            navigate('/');
-        } else {
-            const errorData = await response.json();
-            console.error('Registration failed:', errorData.error);
-            setError(errorData.error);
-        }
+            } else {
+                const errorData = await response.json();
+                console.error('Registration failed:', errorData.error);
+                setError(errorData.error);
+            }
         } catch (error) {
-        console.error('Error during registration:', error);
-        setError('An error occurred during registration. Please try again later.');
+            console.error('Error during registration:', error);
+            setError('An error occurred during registration. Please try again later.');
         }
     };
 
@@ -64,7 +65,7 @@ const Register = (props) => {
             <h1>Register</h1>
             {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Username: </label>
                 <input
                     name="username"
                     type="text"
@@ -73,7 +74,7 @@ const Register = (props) => {
                     placeholder="username"
                 />
                 <br />
-                <label htmlFor="email">Email Address:</label>
+                <label htmlFor="email">Email Address: </label>
                 <input
                     name="email"
                     type="email"
@@ -82,7 +83,7 @@ const Register = (props) => {
                     placeholder="email"
                 />
                 <br />
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Password: </label>
                 <input name="password" type="password" placeholder="password" />
                 <br />
                 <button type="submit">Submit</button>

@@ -19,8 +19,10 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
 
         const password = e.target.password.value;
+
         try {
             const response = await fetch('/api/users/login', {
                 method: 'POST',
@@ -41,15 +43,16 @@ const Login = () => {
                 localStorage.setItem('token', token);
                 dispatch(login(user));
                 navigate('/');
+
             } else {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData.error);
                 setError(errorData.error);
-              }
-            } catch (error) {
-                console.error('Error during login:', error);
-                setError('An error occurred during login. Please try again later.');
             }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setError('An error occurred during login. Please try again later.');
+        }
     };
 
     return (
@@ -65,8 +68,10 @@ const Login = () => {
                     onChange={handleChange} 
                     placeholder='email'
                 />
+                <br />
                 <label htmlFor="password">Password: </label>
                 <input name="password" type="password" placeholder='password'/>
+                <br />
                 <button type="submit">Submit</button>
             </form>
         </div>
