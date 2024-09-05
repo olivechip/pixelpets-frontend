@@ -45,8 +45,8 @@ const Register = () => {
                 console.log('User registered successfully:', newUser);
 
                 // Stores JWT, updates Redux user store, navigate back Home
-                localStorage.setItem('token', token);
-                dispatch(register(user));
+                localStorage.setItem('token', newUser.token);
+                dispatch(register(newUser));
                 navigate('/');
 
             } else {
