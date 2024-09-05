@@ -48,7 +48,7 @@ const Login = () => {
               }
             } catch (error) {
                 console.error('Error during login:', error);
-                setError('An error occurred during login. Please try again later.'); // Generic error message
+                setError('An error occurred during login. Please try again later.');
             }
     };
 
