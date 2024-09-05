@@ -1,16 +1,16 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Home = ({ isLoggedIn, user }) => {
+const Home = () => {
+    const { isLoggedIn, user } = useSelector(state => state.user);
 
-    console.log(isLoggedIn);
-    console.log(user); //fix this, returns undefined, possiblly prop drilling issue from App?
-
+    console.log(isLoggedIn, user);
     return (
         <div>
-            {isLoggedIn ? ( 
+            {isLoggedIn && user ? ( 
                 <div> 
                     {/* Content for logged-in users */}
-                    <h1>Welcome back, 'user.username'!</h1>
+                    <h1>Welcome back, {user.username}!</h1>
                     {/* ... other content for authenticated users */}
                 </div>
             ) : ( 

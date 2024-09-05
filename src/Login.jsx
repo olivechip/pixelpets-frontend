@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from './redux/store';
 
-const Login = ({ onLogin, setUser }) => {
+const Login = () => {
     const [ formData, setFormData ] = useState({ email: "" });
     const [ error, setError ] = useState(null);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -33,16 +37,9 @@ const Login = ({ onLogin, setUser }) => {
                 const { token, user } = await response.json();
                 console.log('User logged in successfully:', user, token);
 
-                // Stores the token (e.g., in local storage)
+                // Stores JWT, updates Redux user store, navigate back Home
                 localStorage.setItem('token', token);
-
-                // Update application state (call onLogin prop)
-                onLogin();
-
-                // Update user state (adds user object to state)
-                setUser();
-
-                // Redirect to the home page ('/')
+                dispatch(login(user));
                 navigate('/');
             } else {
                 const errorData = await response.json();
