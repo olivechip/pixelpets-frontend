@@ -41,12 +41,12 @@ const Register = () => {
             });
 
             if (response.ok) {
-                const newUser = await response.json();
-                console.log('User registered successfully:', newUser);
+                const { token, user } = await response.json();
+                console.log('User registered successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate back Home
-                localStorage.setItem('token', newUser.token);
-                dispatch(register(newUser));
+                localStorage.setItem('token', token);
+                dispatch(register(user));
                 navigate('/');
 
             } else {
