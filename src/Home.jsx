@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     const { isLoggedIn, user } = useSelector(state => state.user);
-
-    console.log(isLoggedIn, user);
+    
+    console.log(isLoggedIn, user, localStorage);
     return (
         <div>
             {isLoggedIn && user ? ( 

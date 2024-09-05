@@ -1,10 +1,11 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from './redux/store';
+import { logout, persistor } from './redux/store';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
 import Navbar from './Navbar';
+import NotFound from './NotFound';
 
 import './App.css';
 
@@ -17,6 +18,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(logout());
+    persistor.purge();
     navigate('/');
   };
 
@@ -29,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         {/* ... other routes */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
