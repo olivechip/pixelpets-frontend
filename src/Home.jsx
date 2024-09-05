@@ -18,8 +18,9 @@ const Home = () => {
                     <h1>Welcome to Pixel Pets!</h1>
                     <p>Create your account and start adopting adorable virtual pets!</p>
                     <div>
-                        <Link to="/register">Register</Link>
                         <Link to="/login">Login</Link>
+                        <br />
+                        <Link to="/register">Register</Link>
                     </div>
                 </div>
             )}
