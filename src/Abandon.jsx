@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
-    const { user } = useSelector(state => state.user);
-    const [ pets, setPets ] = useState([]);
+const Abandon = () => {
+    const { user } = useSelector((state) => state.user);
+    const [pets, setPets] = useState([]);
 
     useEffect(() => {
         const fetchPets = async () => {
@@ -16,6 +16,7 @@ const Dashboard = () => {
                             'Authorization': `${token}`
                         }
                     });
+
                     if (response.ok) {
                         const data = await response.json();
                         setPets(data);
@@ -28,40 +29,37 @@ const Dashboard = () => {
             }
         };
 
-        if (user) { // Only fetch pets if the user is logged in
+        if (user) {
             fetchPets();
         }
     }, [user]);
 
     return (
         <div>
-            <h1>Dashboard</h1>
-            <div>
-                <Link to="/pound">Pound</Link>
-            </div>
+            <h1>Abandon a Pet</h1>
+            <p>We understand that sometimes circumstances change. If you can no longer care for your Pixel Pet, you can leave them here at the Pixel Pound.</p>
 
             {pets.length > 0 ? (
                 <ul>
-                    {pets.map(pet => (
+                    {pets.map((pet) => (
                         <li key={pet.id}>
-                            <p> 
+                            <p>
                                 **Name:** {pet.name} <br />
                                 **Species:** {pet.species} <br />
                                 **Color:** {pet.color} <br />
                                 **Gender:** {pet.gender} <br />
-                                **Happiness:** {pet.happiness} <br />
-                                **Hunger:** {pet.hunger} <br />
-                                **Last Played:** {pet.last_played ? new Date(pet.last_played).toLocaleString() : 'Never'} <br />
-                                **Last Fed:** {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : 'Never'} 
-                            </p> 
+                                <Link to={`/pound/abandon/${pet.id}`}>
+                                <button>Abandon</button>
+                                </Link>
+                            </p>
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p>You have no pets yet. Visit the <Link to="/pound">Pound</Link> to adopt one!</p>
+                <p>You have no pets to abandon.</p>
             )}
         </div>
     );
-}
+};
 
-export default Dashboard;
+export default Abandon;

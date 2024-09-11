@@ -6,7 +6,10 @@ import Register from './Register';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import Pound from './Pound';
+import Adopt from './Adopt';
+import Abandon from './Abandon';
 import Navbar from './Navbar';
+import Forbidden from './Forbidden';
 import NotFound from './NotFound';
 
 function App() {
@@ -19,7 +22,11 @@ function App() {
     localStorage.removeItem('token');
     dispatch(logout());
     persistor.purge();
-    navigate('/');
+
+    // delayed redirect
+    setTimeout(() => {
+      navigate('/');
+    }, 100);
   };
 
   return (
@@ -32,7 +39,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/pound" element={<Pound />} />
+        <Route path="/pound/adopt" element={<Adopt />} />
+        <Route path="/pound/abandon" element={<Abandon />} />
         {/* ... other routes */}
+        <Route path="/403" element={<Forbidden />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

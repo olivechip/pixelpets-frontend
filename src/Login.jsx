@@ -37,7 +37,7 @@ const Login = () => {
 
             if (response.ok){
                 const { token, user } = await response.json();
-                console.log('User logged in successfully:', user, token);
+                console.log('User logged in successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate back Home
                 localStorage.setItem('token', token);
