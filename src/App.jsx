@@ -4,6 +4,8 @@ import { logout, persistor } from './redux/store';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
+import Dashboard from './Dashboard';
+import Pound from './Pound';
 import Navbar from './Navbar';
 import NotFound from './NotFound';
 
@@ -28,6 +30,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/pound" element={<Pound />} />
         {/* ... other routes */}
         <Route path="*" element={<NotFound />} />
       </Routes>
