@@ -1,28 +1,30 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(0, 0%, 20%);
+  padding: 0;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: #333;
+  display: flex;
+  align-items: center;
 }
 
-li {
-  float: left;
+.navbar-left {
+  margin-right: auto; /* Home stays on the left */
 }
 
-li .navbar-right {
-  float: right;
+.navbar-right {
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
 }
 
 li a {
-  display: block;
   color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
 }
