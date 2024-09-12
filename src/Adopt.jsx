@@ -1,46 +1,43 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPoundPets, adoptPet } from './redux/store'; 
 
 const Adopt = () => {
-    const [pets, setPets] = useState([]);
+    const { user } = useSelector((state) => state.user);
+    const { poundPets, loading, error } = useSelector(state => state.pound);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchPoundPets = async () => {
-            try {
-                const response = await fetch('/api/pound');
+        if (user) {
+            dispatch(fetchPoundPets()); 
+        }
+    }, [dispatch]);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setPets(data);
-                } else {
-                    console.error('Error fetching pound pets:', response.status, response.statusText);
-                }
-            } catch (error) {
-                console.error('Error fetching pound pets:', error);
-            }
-        };
-
-        fetchPoundPets();
-    }, []);
+    const handleAdopt = (petId) => {
+        dispatch(adoptPet(petId));
+        // implement navigattion to success page
+    };
 
     return (
         <div>
             <h1>Adopt a Pet</h1>
-            {pets.length > 0 ? (
+
+            {loading && <p>Loading pets...</p>} 
+            {error && <div className="error">{error}</div>}
+
+            {!loading && poundPets.length > 0 ? (
                 <ul>
-                {pets.map(pet => (
-                    <li key={pet.id}>
-                        <p>
-                            **Name:** {pet.name} <br />
-                            **Species:** {pet.species} <br />
-                            **Color:** {pet.color} <br />
-                            **Gender:** {pet.gender} <br />
-                            <Link to={`/pets/${pet.id}/adopt`}> {/* Link to adopt this specific pet */}
-                            <button>Adopt</button>
-                            </Link>
-                        </p> 
-                    </li>
-                ))}
+                    {poundPets.map((pet) => (
+                        <li key={pet.id}>
+                            <p>
+                                **Name:** {pet.name} <br />
+                                **Species:** {pet.species} <br />
+                                **Color:** {pet.color} <br />
+                                **Gender:** {pet.gender} <br />
+                                <button onClick={() => handleAdopt(pet.id)}>Adopt</button>
+                            </p> 
+                        </li>
+                    ))}
                 </ul>
             ) : (
                 <p>There are no pets available for adoption at the moment. Check back later!</p>
