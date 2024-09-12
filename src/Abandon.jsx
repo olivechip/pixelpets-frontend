@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserPets, abandonPet } from './redux/store';
 
@@ -6,6 +7,7 @@ const Abandon = () => {
     const { user } = useSelector((state) => state.user);
     const { pets, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -14,8 +16,9 @@ const Abandon = () => {
     }, [user, dispatch]);
 
     const handleAbandon = (petId) => {
-        dispatch(abandonPet(petId));
-        // implement navigattion to success page
+        const { id, name, color, species } = pets.find(pet => pet.id === petId)
+        dispatch(abandonPet(id));
+        navigate('/dashboard', { state: { message: `You have abandoned ${name}, the ${color} ${species}.` }});
     };
 
     return (

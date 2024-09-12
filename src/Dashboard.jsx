@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchUserPets, playWithPet, feedPet } from './redux/store';
 
 const Dashboard = () => {
     const { user } = useSelector(state => state.user);
     const { pets, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const { message } = location.state || {};
 
     useEffect(() => {
         if (user) {
@@ -23,6 +25,10 @@ const Dashboard = () => {
 
             {loading && <p>Loading pets...</p>}
             {error && <div className="error">{error}</div>}
+
+            { message ? (
+                <div className="error">{message}</div>
+            ) : null }
 
             {!loading && pets.length > 0 ? (
                 <ul>

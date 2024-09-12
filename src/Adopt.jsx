@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPoundPets, adoptPet } from './redux/store'; 
 
@@ -6,6 +7,7 @@ const Adopt = () => {
     const { user } = useSelector((state) => state.user);
     const { poundPets, loading, error } = useSelector(state => state.pound);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -14,8 +16,9 @@ const Adopt = () => {
     }, [dispatch]);
 
     const handleAdopt = (petId) => {
-        dispatch(adoptPet(petId));
-        // implement navigattion to success page
+        const { id, name, color, species } = poundPets.find(pet => pet.id === petId)
+        dispatch(adoptPet(id));
+        navigate('/dashboard', { state: { message: `You have adopted ${name}, the ${color} ${species}!` }});
     };
 
     return (
