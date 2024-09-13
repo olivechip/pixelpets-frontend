@@ -44,10 +44,10 @@ const Register = () => {
                 const { token, user } = await response.json();
                 console.log('User registered successfully:', user);
 
-                // Stores JWT, updates Redux user store, navigate back Home
+                // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 dispatch(register(user));
-                navigate('/');
+                navigate('/dashboard', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
 
             } else {
                 const errorData = await response.json();

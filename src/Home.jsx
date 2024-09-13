@@ -11,13 +11,11 @@ const Home = () => {
         <div>
             {isLoggedIn && user ? ( 
                 <div> 
-                    {/* Content for logged-in users */}
                     <h1>Welcome back, {user.username}!</h1>
                     <Link to="/dashboard">Go to Dashboard</Link>
                 </div>
             ) : ( 
                 <div> 
-                    {/* Content for logged-out users */}
                     <h1>Welcome to Pixel Pets!</h1>
                     <p>Create your account and start adopting adorable virtual pets!</p>
                     <div>

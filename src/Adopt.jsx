@@ -21,6 +21,8 @@ const Adopt = () => {
         navigate('/dashboard', { state: { message: `You have adopted ${name}, the ${color} ${species}!` }});
     };
 
+    console.log(poundPets)
+
     return (
         <div>
             <h1>Adopt a Pet</h1>
@@ -28,7 +30,7 @@ const Adopt = () => {
             {loading && <p>Loading pets...</p>} 
             {error && <div className="error">{error}</div>}
 
-            {!loading && poundPets.length > 0 ? (
+            {!loading && typeof(poundPets) === 'object' && poundPets.length > 0 ? (
                 <ul>
                     {poundPets.map((pet) => (
                         <li key={pet.id}>
