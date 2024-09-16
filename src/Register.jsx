@@ -47,7 +47,7 @@ const Register = () => {
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 dispatch(register(user));
-                navigate('/dashboard', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
+                navigate('/', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
 
             } else {
                 const errorData = await response.json();

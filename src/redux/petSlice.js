@@ -1,5 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`/api/pets/${petId}`, {
+        headers: { 'Authorization': `${token}` }
+    });
+
+    if (!response.ok) {
+        throw new Error('Error fetching pet details');
+    }
+
+    const data = await response.json();
+    return data;
+});
+
 const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/users/${userId}/pets`, {
@@ -14,7 +28,7 @@ const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     return data;
 });
 
-const playWithPet = createAsyncThunk('pets/playWithPet', async (petId) => {
+const playWithPet = createAsyncThunk('pets/playWithPet', async ({ petId, userId }, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/pets/${petId}/play`, {
         method: 'POST',
@@ -22,15 +36,22 @@ const playWithPet = createAsyncThunk('pets/playWithPet', async (petId) => {
             'Authorization': `${token}` 
         }
     });
-  
+    
     if (!response.ok) {
-      throw new Error('Error playing with pet');
+        // Handle the "too hungry" error
+        if (response.status === 400 || response.status === 403) { 
+            const errorData = await response.json();
+            return rejectWithValue(errorData.error); 
+        } else {
+            return rejectWithValue('An error occurred while playing with the pet.');
+        }
     }
 
-    return { petId, message: 'Played with pet successfully' };
+    dispatch(fetchUserPets(userId));
+    return { petId };
 });
 
-const feedPet = createAsyncThunk('pets/feedPet', async (petId) => {
+const feedPet = createAsyncThunk('pets/feedPet', async ({ petId, userId }, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/pets/${petId}/feed`, {
         method: 'POST',
@@ -40,24 +61,67 @@ const feedPet = createAsyncThunk('pets/feedPet', async (petId) => {
     });
   
     if (!response.ok) {
-        throw new Error('Error feeding pet');
+        // Handle the "only feed your own pet" error
+        if (response.status === 400 || response.status === 403) { 
+            const errorData = await response.json();
+            return rejectWithValue(errorData.error); 
+        } else {
+            return rejectWithValue('An error occurred while playing with the pet.');
+        }
     }
-  
-    return { petId, message: 'Pet fed successfully' };
+
+    dispatch(fetchUserPets(userId));
+    return { petId };
 });
   
+
+const petAnotherPet = createAsyncThunk('pets/petAnotherPet', async (petId, { rejectWithValue }) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`/api/pets/${petId}/pet`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `${token}` 
+        }
+    });
+    // console.log(response)
+
+    if (!response.ok) {
+        // Handle the "once per day" error
+        if (response.status === 400) {
+            const errorData = await response.json();
+            return rejectWithValue(errorData.error); 
+        } else {
+            return rejectWithValue('An error occurred while petting the pet.');
+        }
+    }
+
+    return { petId };
+});
+
 const petSlice = createSlice({
     name: 'pet',
     initialState: {
       pets: [],
       loading: false,
-      error: null
+      error: null,
     },
     reducers: {
-      // add reducers later if needed
+        // add reducers if needed
     },
     extraReducers: (builder) => {
         builder
+            .addCase(fetchPetById.pending, (state) => {
+                state.loading = true;
+                state.error = null; 
+            })
+            .addCase(fetchPetById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.selectedPet = action.payload; 
+            })
+            .addCase(fetchPetById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
             .addCase(fetchUserPets.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -70,33 +134,57 @@ const petSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
+            .addCase(playWithPet.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(playWithPet.fulfilled, (state, action) => {
+                state.loading = false;
                 const { petId } = action.payload; 
                 const petIndex = state.pets.findIndex(pet => pet.id === petId);
                 if (petIndex !== -1) {
-                    state.pets[petIndex].hunger = Math.max(Math.min(state.pets[petIndex].hunger - 10, 100), 0);
                     state.pets[petIndex].happiness = Math.max(Math.min(state.pets[petIndex].happiness + 20, 100), 0);
-                    state.pets[petIndex].last_fed = new Date().toISOString(); 
+                    state.pets[petIndex].hunger = Math.max(Math.min(state.pets[petIndex].hunger - 10, 100), 0);
                 }
             })
             .addCase(playWithPet.rejected, (state, action) => {
-                state.error = action.error.message;
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(feedPet.pending, (state) => {
+                state.loading = true;
+                state.error = null;
             })
             .addCase(feedPet.fulfilled, (state, action) => {
+                state.loading = false;
                 const { petId } = action.payload; 
                 const petIndex = state.pets.findIndex(pet => pet.id === petId);
                 if (petIndex !== -1) {
                     state.pets[petIndex].hunger = Math.max(Math.min(state.pets[petIndex].hunger + 20, 100), 0); 
-                    state.pets[petIndex].happiness = Math.max(Math.min(state.pets[petIndex].happiness + 5, 100), 0);
-                    state.pets[petIndex].last_fed = new Date().toISOString(); 
                 }
             })
             .addCase(feedPet.rejected, (state, action) => {
-                state.error = action.error.message;
+                state.loading = false;
+                state.error = action.payload;
             })
+            .addCase(petAnotherPet.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(petAnotherPet.fulfilled, (state, action) => {
+                state.loading = false;
+                const { petId } = action.payload;
+                if (state.selectedPet && state.selectedPet.id === petId) {
+                    state.selectedPet.popularity += 1;
+                }
+            })
+            .addCase(petAnotherPet.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     }
 });
 
 export const { } = petSlice.actions;
-export { fetchUserPets, playWithPet, feedPet };
+export { fetchPetById, fetchUserPets, playWithPet, feedPet, petAnotherPet };
 export default petSlice.reducer;

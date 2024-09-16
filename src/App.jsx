@@ -5,9 +5,12 @@ import Home from './Home';
 import Register from './Register';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import PetDetail from './PetDetail';
 import Pound from './Pound';
 import Adopt from './Adopt';
+import Adopted from './Adopted';
 import Abandon from './Abandon';
+import Abandoned from './Abandoned';
 import Navbar from './Navbar';
 import Forbidden from './Forbidden';
 import NotFound from './NotFound';
@@ -38,9 +41,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/pets/:petId" element={<PetDetail />} />
         <Route path="/pound" element={<Pound />} />
         <Route path="/pound/adopt" element={<Adopt />} />
+        <Route path="/pound/adopted" element={<Adopted />} />
         <Route path="/pound/abandon" element={<Abandon />} />
+        <Route path="/pound/abandoned" element={<Abandoned />} />
         {/* ... other routes */}
         <Route path="/403" element={<Forbidden />} />
         <Route path="*" element={<NotFound />} />

@@ -41,9 +41,8 @@ const Login = () => {
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
-                console.log(user)
                 dispatch(login(user));
-                navigate('/dashboard', { state: { message: `Welcome back, ${user.username}!` }} );
+                navigate('/');
 
             } else {
                 const errorData = await response.json();

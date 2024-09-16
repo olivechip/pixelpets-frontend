@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserPets, abandonPet } from './redux/store';
 
@@ -18,7 +18,10 @@ const Abandon = () => {
     const handleAbandon = (petId) => {
         const { id, name, color, species } = pets.find(pet => pet.id === petId)
         dispatch(abandonPet(id));
-        navigate('/dashboard', { state: { message: `You have abandoned ${name}, the ${color} ${species}.` }});
+        navigate('/pound/abandoned', { 
+            state: { message: `You have abandoned ${name}, the ${color} ${species}.` },
+            replace: true
+        });
     };
 
     return (
@@ -34,7 +37,7 @@ const Abandon = () => {
                     {pets.map((pet) => (
                         <li key={pet.id}>
                             <p>
-                                **Name:** {pet.name} <br />
+                                **Name:** <Link to={`/pets/${pet.id}`}>{pet.name}</Link> <br />
                                 **Species:** {pet.species} <br />
                                 **Color:** {pet.color} <br />
                                 **Gender:** {pet.gender} <br />

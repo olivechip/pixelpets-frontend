@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPoundPets, adoptPet } from './redux/store'; 
 
@@ -18,10 +18,11 @@ const Adopt = () => {
     const handleAdopt = (petId) => {
         const { id, name, color, species } = poundPets.find(pet => pet.id === petId)
         dispatch(adoptPet(id));
-        navigate('/dashboard', { state: { message: `You have adopted ${name}, the ${color} ${species}!` }});
+        navigate('/pound/adopted', { 
+            state: { message: `You have adopted ${name}, the ${color} ${species}!` },
+            replace: true
+        });    
     };
-
-    console.log(poundPets)
 
     return (
         <div>
@@ -35,7 +36,7 @@ const Adopt = () => {
                     {poundPets.map((pet) => (
                         <li key={pet.id}>
                             <p>
-                                **Name:** {pet.name} <br />
+                                **Name:** <Link to={`/pets/${pet.id}`}>{pet.name}</Link> <br />
                                 **Species:** {pet.species} <br />
                                 **Color:** {pet.color} <br />
                                 **Gender:** {pet.gender} <br />

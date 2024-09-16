@@ -13,6 +13,13 @@ nav ul {
   align-items: center;
 }
 
+nav a {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
 .navbar-left {
   margin-right: auto; /* Home stays on the left */
 }
@@ -20,11 +27,4 @@ nav ul {
 .navbar-right {
   display: flex;
   gap: 10px; /* Adds space between buttons */
-}
-
-li a {
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
 }
