@@ -5,6 +5,7 @@ import Home from './Home';
 import Register from './Register';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import UserProfile from './UserProfile';
 import PetDetail from './PetDetail';
 import Pound from './Pound';
 import Adopt from './Adopt';
@@ -41,6 +42,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="/pets/:petId" element={<PetDetail />} />
         <Route path="/pound" element={<Pound />} />
         <Route path="/pound/adopt" element={<Adopt />} />

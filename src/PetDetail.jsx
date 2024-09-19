@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPetById, petAnotherPet } from './redux/store';
 
@@ -8,7 +8,8 @@ const PetDetail = () => {
     const { user } = useSelector(state => state.user);
     const { selectedPet: pet, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
-    
+        
+    console.log(user, petId, pet)
     useEffect(() => {
         dispatch(fetchPetById(petId));
     }, [ petId, dispatch]);
@@ -25,10 +26,16 @@ const PetDetail = () => {
             {pet && (
                 <>
                     <p>
-                        <b>Owned By:</b> {pet.owner_name || 'The Pixel Pound'} {isOwner && "(me)"}
+                        <b>Owned By: </b> 
+                        {pet.owner_name ? ( 
+                            <Link to={`/users/${pet.owner_id}`}>{pet.owner_name}</Link> 
+                        ) : ( 
+                            <Link to={'/pound'}>The Pixel Pound</Link> 
+                        )} 
+                        {isOwner && " (me)"}
                     </p>
                     <p>
-                        <b>Info</b> <br />
+                        <b>Pet Info</b> <br />
                         **Name:** {pet.name} <br />
                         **Species:** {pet.species} <br />
                         **Color:** {pet.color} <br />

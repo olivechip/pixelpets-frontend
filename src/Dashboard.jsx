@@ -19,9 +19,6 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard</h1>
-            <div>
-                <Link to="/pound">Pound</Link>
-            </div>
 
             {loading && <p>Loading pets...</p>}
             {error && <div className="error">{error}</div>}

@@ -1,8 +1,9 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: hsl(0, 0%, 20%);
-  padding: 0;
+  background-color: rgb(247, 108, 108);
+  /* background-color: hwb(0 20% 80%); */
+  padding: 0.5rem;
 }
 
 nav ul {
