@@ -4,6 +4,9 @@ import { logout, persistor } from './redux/store';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
+import AccountDetails from './AccountDetails';
+// import AccountEdit from './AccountEdit';
+import AccountDelete from './AccountDelete';
 import Dashboard from './Dashboard';
 import UserProfile from './UserProfile';
 import PetDetail from './PetDetail';
@@ -41,6 +44,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<AccountDetails />} />
+        {/* <Route path="/account/edit" element={<AccountEdit />} /> */}
+        <Route path="/account/delete" element={<AccountDelete />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="/pets/:petId" element={<PetDetail />} />

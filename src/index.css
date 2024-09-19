@@ -29,3 +29,13 @@ nav a {
   display: flex;
   gap: 10px; /* Adds space between buttons */
 }
+
+.message {
+  background-color:rgb(227, 252, 231);
+  color: rgb(37, 168, 4);
+
+}
+.error {
+  background-color:rgb(255, 230, 230);
+  color: red;
+}

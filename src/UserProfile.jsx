@@ -5,7 +5,6 @@ import { fetchUserById, fetchUserPets } from './redux/store';
 
 const UserProfile = () => {
     const { userId } = useParams();
-    const { user } = useSelector(state => state.user);
     const { profile, loading, error } = useSelector(state => state.userProfile);
     const { pets } = useSelector(state => state.pets);
     const dispatch = useDispatch();
@@ -14,8 +13,6 @@ const UserProfile = () => {
         dispatch(fetchUserById(userId))
         dispatch(fetchUserPets(userId));
     }, [userId, dispatch]);
-
-    const isOwnProfile = user && profile && user.id === profile.id;
 
     return (
         <div>
@@ -32,14 +29,6 @@ const UserProfile = () => {
                     <p>
                         <b>Joined:</b> {new Date(profile.created_at).toLocaleDateString()}
                     </p>
-                    
-                    {/* Permission-based Profile Rendering */}
-                    {isOwnProfile && (
-                        <>
-                            <button>Edit Profile</button><br />
-                            <button>Delete Account</button>
-                        </>
-                    )}
 
                     {/* Pets Owned Info */}
                     <h2>Pets</h2>

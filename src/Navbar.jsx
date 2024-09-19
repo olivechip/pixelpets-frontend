@@ -32,7 +32,7 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
             ) : (
             <ul className="navbar-right">
                 <li>
-                    <Link to={`/users/${user.id}`}>{user.username}</Link> 
+                    <Link to={`/account`}>{user.username}</Link> 
                 </li>
                 <li>
                     <Link onClick={handleLogout}>Logout</Link> 

@@ -22,6 +22,9 @@ const Home = () => {
                 </>
             ) : 
             <div> 
+                <div className="message">
+                    <p>{message}</p>
+                </div>
                 <h1>Welcome to Pixel Pets!</h1>
                 <p>Create your account and start adopting adorable virtual pets!</p>
                 <div>

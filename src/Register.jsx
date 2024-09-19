@@ -26,7 +26,13 @@ const Register = () => {
         setError(null);
 
         const password = e.target.password.value;
+        const confirmPassword = e.target.confirmPassword.value;
 
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+        
         try {
             const response = await fetch('/api/users/register', {
                 method: 'POST',
@@ -36,7 +42,8 @@ const Register = () => {
                 body: JSON.stringify({
                     username: formData.username,
                     email: formData.email,
-                    password
+                    password,
+                    confirmPassword
                 })
             });
 
@@ -63,31 +70,36 @@ const Register = () => {
     return (
         <div>
             <h1>Register</h1>
-            {error && <div className="error">{error}</div>}
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username: </label>
-                <input
-                    name="username"
-                    type="text"
-                    value={formData.username}
-                    onChange={handleChange}
-                    placeholder="username"
-                />
-                <br />
-                <label htmlFor="email">Email Address: </label>
-                <input
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="email"
-                />
-                <br />
-                <label htmlFor="password">Password: </label>
-                <input name="password" type="password" placeholder="password" />
-                <br />
-                <button type="submit">Submit</button>
-            </form>
+            <div>
+                {error && <div className="error">{error}</div>}
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">Username: </label>
+                    <input
+                        name="username"
+                        type="text"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="username"
+                    />
+                    <br />
+                    <label htmlFor="email">Email Address: </label>
+                    <input
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="email"
+                    />
+                    <br />
+                    <label htmlFor="password">Password: </label>
+                    <input name="password" type="password" placeholder="password" />
+                    <br />
+                    <label htmlFor="confirmPassword">Confirm Password: </label>
+                    <input name="confirmPassword" type="password" placeholder="confirm password" />
+                    <br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     );
 };
