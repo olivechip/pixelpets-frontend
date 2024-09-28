@@ -66,7 +66,7 @@ const Generate = () => {
 
     return (
         <div className="container">
-            <h1 className="create-a-pet">Create a Pet</h1>
+            <h1>Create a Pet</h1>
             <div className="content">
                 <div className="left-section">
                     <h3>Select Species</h3>

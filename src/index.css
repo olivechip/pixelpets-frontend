@@ -31,6 +31,14 @@ nav a {
   gap: 10px; /* Adds space between buttons */
 }
 
+body {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom:  20px;
+}
+
 .message {
   background-color:rgb(227, 252, 231);
   color: rgb(37, 168, 4);
@@ -45,11 +53,6 @@ nav a {
   display: flex;
   flex-direction: column; 
   align-items: center;
-}
-
-.create-a-pet {
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .content {
@@ -228,4 +231,36 @@ nav a {
 
 .gender-group {
   margin-right: 0;
+}
+
+.pet-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pet-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+  max-width: 30%; 
+}
+
+.pet-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.pet-details h3 {
+  margin: 5px 0;
+}
+
+.pet-details p {
+  margin: 5px 0;
+}
+
+.pet-details button {
+  margin: 10px 0;
 }

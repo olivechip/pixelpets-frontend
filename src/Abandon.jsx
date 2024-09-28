@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserPets, abandonPet } from './redux/store';
+import { capitalizeFirstLetter } from './helpers/helpers';
 
 const Abandon = () => {
     const { user } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ const Abandon = () => {
         const { id, name, color, species } = pets.find(pet => pet.id === petId)
         dispatch(abandonPet(id));
         navigate('/pound/abandoned', { 
-            state: { message: `You have abandoned ${name}, the ${color} ${species}.` },
+            state: { message: `You have abandoned ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}.` },
             replace: true
         });
     };
@@ -33,19 +34,22 @@ const Abandon = () => {
             {error && <div className="error">{error}</div>}
 
             {!loading && pets.length > 0 ? (
-                <ul>
+                <div className="pet-cards-container"> 
                     {pets.map((pet) => (
-                        <li key={pet.id}>
-                            <p>
-                                **Name:** <Link to={`/pets/${pet.id}`}>{pet.name}</Link> <br />
-                                **Species:** {pet.species} <br />
-                                **Color:** {pet.color} <br />
-                                **Gender:** {pet.gender} <br />
+                        <div key={pet.id} className="pet-card"> 
+                            <Link to={`/pets/${pet.id}`}> 
+                                <img src={pet.img_url} alt="" className="pet-image" />
+                            </Link>
+                            <div className="pet-details">
+                                <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3> 
+                                <p>Species: {capitalizeFirstLetter(pet.species)}</p>
+                                <p>Color: {capitalizeFirstLetter(pet.color)}</p> 
+                                <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
                                 <button onClick={() => handleAbandon(pet.id)}>Abandon</button>
-                            </p>
-                        </li>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>You have no pets to abandon.</p>
             )}

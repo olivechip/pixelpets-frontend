@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPoundPets, adoptPet } from './redux/store'; 
+import { capitalizeFirstLetter } from './helpers/helpers';
 
 const Adopt = () => {
     const { user } = useSelector((state) => state.user);
@@ -19,7 +20,7 @@ const Adopt = () => {
         const { id, name, color, species } = poundPets.find(pet => pet.id === petId)
         dispatch(adoptPet(id));
         navigate('/pound/adopted', { 
-            state: { message: `You have adopted ${name}, the ${color} ${species}!` },
+            state: { message: `You have adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}!` },
             replace: true
         });    
     };
@@ -32,19 +33,22 @@ const Adopt = () => {
             {error && <div className="error">{error}</div>}
 
             {!loading && typeof(poundPets) === 'object' && poundPets.length > 0 ? (
-                <ul>
+                <div className="pet-cards-container">
                     {poundPets.map((pet) => (
-                        <li key={pet.id}>
-                            <p>
-                                **Name:** <Link to={`/pets/${pet.id}`}>{pet.name}</Link> <br />
-                                **Species:** {pet.species} <br />
-                                **Color:** {pet.color} <br />
-                                **Gender:** {pet.gender} <br />
+                        <div key={pet.id} className="pet-card">
+                            <Link to={`/pets/${pet.id}`}>
+                                <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
+                            </Link>
+                            <div className="pet-details">
+                                <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3> 
+                                <p>Species: {capitalizeFirstLetter(pet.species)}</p>
+                                <p>Color: {capitalizeFirstLetter(pet.color)}</p>
+                                <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
                                 <button onClick={() => handleAdopt(pet.id)}>Adopt</button>
-                            </p> 
-                        </li>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>There are no pets available for adoption at the moment. Check back later!</p>
             )}
