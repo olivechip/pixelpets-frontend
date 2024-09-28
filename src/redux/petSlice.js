@@ -28,6 +28,23 @@ const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     return data;
 });
 
+const deletePet = createAsyncThunk('pets/deletePet', async (petId, { dispatch, rejectWithValue }) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`/api/pets/${petId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `${token}`
+        }
+    });
+
+    if (!response.ok) {
+        return rejectWithValue('An error occurred while deleting the pet.');
+    }
+
+    dispatch(fetchUserPets(user.id)); 
+    return { petId };
+});
+
 const playWithPet = createAsyncThunk('pets/playWithPet', async ({ petId, userId }, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/pets/${petId}/play`, {
@@ -186,5 +203,5 @@ const petSlice = createSlice({
 });
 
 export const { } = petSlice.actions;
-export { fetchPetById, fetchUserPets, playWithPet, feedPet, petAnotherPet };
+export { fetchPetById, deletePet, fetchUserPets, playWithPet, feedPet, petAnotherPet };
 export default petSlice.reducer;

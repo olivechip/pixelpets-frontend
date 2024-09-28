@@ -5,11 +5,15 @@ import Home from './Home';
 import Register from './Register';
 import Login from './Login';
 import AccountDetails from './AccountDetails';
-// import AccountEdit from './AccountEdit';
+import AccountEdit from './AccountEdit';
 import AccountDelete from './AccountDelete';
 import Dashboard from './Dashboard';
 import UserProfile from './UserProfile';
 import PetDetail from './PetDetail';
+import Lab from './Lab';
+import Generate from './Generate';
+import Delete from './Delete';
+import Deleted from './Deleted';
 import Pound from './Pound';
 import Adopt from './Adopt';
 import Adopted from './Adopted';
@@ -45,11 +49,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<AccountDetails />} />
-        {/* <Route path="/account/edit" element={<AccountEdit />} /> */}
+        <Route path="/account/edit" element={<AccountEdit />} />
         <Route path="/account/delete" element={<AccountDelete />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="/pets/:petId" element={<PetDetail />} />
+        <Route path="/lab" element={<Lab />} />
+        <Route path="//lab/generate" element={<Generate />} />
+        <Route path="/lab/delete" element={<Delete />} />
+        <Route path="/lab/deleted" element={<Deleted />} />
         <Route path="/pound" element={<Pound />} />
         <Route path="/pound/adopt" element={<Adopt />} />
         <Route path="/pound/adopted" element={<Adopted />} />

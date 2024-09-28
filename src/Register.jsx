@@ -32,7 +32,7 @@ const Register = () => {
             setError('Passwords do not match');
             return;
         }
-        
+
         try {
             const response = await fetch('/api/users/register', {
                 method: 'POST',
@@ -42,8 +42,7 @@ const Register = () => {
                 body: JSON.stringify({
                     username: formData.username,
                     email: formData.email,
-                    password,
-                    confirmPassword
+                    password
                 })
             });
 

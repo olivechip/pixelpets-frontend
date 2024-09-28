@@ -12,8 +12,6 @@ const AccountDetails = () => {
         dispatch(fetchUserById(user.id))
     }, []);
 
-    console.log('profile', profile)
-
     return (
         <div>
             <h1>Account Details</h1>

@@ -4,6 +4,7 @@ nav {
   background-color: rgb(247, 108, 108);
   /* background-color: hwb(0 20% 80%); */
   padding: 0.5rem;
+  font-size: 24px;
 }
 
 nav ul {
@@ -38,4 +39,193 @@ nav a {
 .error {
   background-color:rgb(255, 230, 230);
   color: red;
+}
+
+.container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.create-a-pet {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+}
+
+.left-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.middle-section, .right-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.colorless-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.colorless-pet {
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: border 0.3s;
+  width: 100px;
+  text-align: center;
+}
+
+.colorless-pet.selected {
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.colorless-pet-name {
+  margin: 0
+}
+
+.colorless-pet.selected .colorless-pet-name {
+  font-weight: bold;
+}
+
+.colorless-pet-img {
+  width: 50px;
+  height: 50px;
+}
+
+.colorless-pet-name {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.dynamic-container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.dynamic-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.color-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.color-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.color-button:hover {
+  background-color: #ccc;
+}
+
+.blue {
+  background-color: rgb(162, 162, 243);
+}
+
+.blue:hover {
+  background-color: rgb(93, 93, 247);
+  border-color: black;
+}
+
+.red {
+  background-color: rgb(245, 111, 111);
+}
+
+.red:hover {
+  background-color: rgb(238, 39, 39);
+  border-color: black;
+}
+
+.green {
+  background-color: rgb(93, 238, 93);
+}
+
+.green:hover {
+  background-color: rgb(32, 202, 32);
+  border-color: black;
+}
+
+.yellow {
+  background-color: rgb(235, 235, 71);
+}
+
+.yellow:hover {
+  background-color: rgb(235, 221, 25);
+  border-color: black;
+}
+
+/* Active state styles */
+.color-button.active {
+  border-color: black;
+}
+
+/* Override active styles to match hover */
+.blue.active {
+  background-color: rgb(93, 93, 247);
+}
+
+.red.active {
+  background-color: rgb(238, 39, 39);
+}
+
+.green.active {
+  background-color: rgb(32, 202, 32);
+}
+
+.yellow.active {
+  background-color: rgb(235, 221, 25);
+}
+.color-button.active {
+  font-weight: bold;
+}
+
+.species-container {
+  margin-top: 50px;
+}
+
+.input-groups {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.input-group, .gender-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.input-group input,
+.gender-group select {
+  width: 90%;
+  padding: 8px;
+}
+
+.gender-group {
+  margin-right: 0;
 }

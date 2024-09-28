@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, persistor, fetchUserById } from './redux/store';
+import { logout, persistor } from './redux/store';
 
 
 const AccountDelete = () => {
@@ -69,7 +69,7 @@ const AccountDelete = () => {
             setError('An error occurred during deletion. Please try again later.');
         }
     }
-
+4
     console.log(user)
     return (
         <div>

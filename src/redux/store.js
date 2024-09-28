@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer, { login, logout, register } from './userSlice';
 import userProfileReducer, { fetchUserById } from './userProfileSlice';
-import petReducer, { fetchPetById, fetchUserPets, playWithPet, feedPet, petAnotherPet } from './petSlice';
+import petReducer, { fetchPetById, fetchUserPets, deletePet, playWithPet, feedPet, petAnotherPet } from './petSlice';
 import poundReducer, { fetchPoundPets, abandonPet, adoptPet } from './poundSlice';
 
 const persistConfig = {
@@ -29,6 +29,6 @@ const persistor = persistStore(store);
 export { store, persistor, 
     login, logout, register, 
     fetchUserById,
-    fetchPetById, fetchUserPets, playWithPet, feedPet, petAnotherPet, 
+    fetchPetById, fetchUserPets, deletePet, playWithPet, feedPet, petAnotherPet, 
     fetchPoundPets, abandonPet, adoptPet 
 };

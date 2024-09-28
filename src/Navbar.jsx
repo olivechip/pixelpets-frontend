@@ -15,6 +15,9 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
                             <Link to="/dashboard">Dashboard</Link> 
                         </li>
                         <li>
+                            <Link to="/lab">Pixel Lab</Link> 
+                        </li>
+                        <li>
                             <Link to="/pound">Pixel Pound</Link> 
                         </li>
                     </>
