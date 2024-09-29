@@ -8,6 +8,7 @@ const Adopted = () => {
     return (
         <div>
             <h1>Pet Adopted!</h1>
+            {/* import happy png */}
             {message ? (
                 <p>{message}</p>
             ) : (

@@ -6,11 +6,11 @@ const Lab = () => {
             <h1>The Pixel Lab</h1>
             <p>Welcome to the Pixel Lab, the birthplace of all Pixelpets!</p>
             <p>
-                Here, you can generate your wildest digital pet dreams or, 
+                Here, you can create your wildest digital pet dreams or, 
                 if necessary, delete your beloved creations.
             </p>
             <div>
-                <Link to="/lab/generate">Generate</Link>
+                <Link to="/lab/create">Create</Link>
                 <br />
                 <Link to="/lab/delete">Delete</Link> 
             </div>

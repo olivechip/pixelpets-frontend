@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserPets, playWithPet, feedPet } from './redux/store';
+import { capitalizeFirstLetter } from './helpers/helpers';
 
 const Dashboard = () => {
     const location = useLocation();
@@ -28,32 +29,38 @@ const Dashboard = () => {
             ) : null }
 
             {!loading && pets.length > 0 ? (
-                <ul>
-                    {pets.map(pet => (
-                        <li key={pet.id}>
-                            <p> 
-                                <b>Pet Info</b> <br />
-                                **Name:** <Link to={`/pets/${pet.id}`}>{pet.name}</Link> <br />
-                                **Species:** {pet.species} <br />
-                                **Color:** {pet.color} <br />
-                                **Gender:** {pet.gender} <br />
-                            </p>
-                            <p>
-                                <b>Stats</b> <br />
-                                **Happiness:** {pet.happiness} <br />
-                                **Hunger:** {pet.hunger} <br />
-                                **Popularity:** {pet.popularity} <br />
-                                **Last Played:** {pet.last_played ? new Date(pet.last_played).toLocaleString() : 'Never'} <br />
-                                **Last Fed:** {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : 'Never'} <br />
-                                <button onClick={() => dispatch(playWithPet({ petId: pet.id, userId: user.id }))}>Play</button> <br />
-                                <button onClick={() => dispatch(feedPet({ petId: pet.id, userId: user.id }))}>Feed</button> <br />
-                            </p> 
-                        </li>
-                    ))}
-                </ul>
+            <div className="pet-cards-container">
+                {pets.map((pet) => (
+                    <div key={pet.id} className="pet-card">
+                        <Link to={`/pets/${pet.id}`}>
+                            <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
+                        </Link>
+                        <div className="pet-details">
+                            <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3>
+                            <p>Species: {capitalizeFirstLetter(pet.species)}</p>
+                            <p>Color: {capitalizeFirstLetter(pet.color)}</p>
+                            <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
+                            <br />
+                            {/* <h4>Stats</h4> */}
+                            <p>Happiness: {pet.happiness}</p>
+                            <p>Hunger: {pet.hunger}</p>
+                            <p>Popularity: {pet.popularity}</p>
+
+                            {/* Irrelevant at the moment */}
+                            {/* <p>Last Played: {pet.last_played? new Date(pet.last_played).toLocaleString(): "Never"}</p>
+                            <p>Last Fed: {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : "Never"}</p> */}
+
+                            <button onClick={() =>dispatch(playWithPet({ petId: pet.id, userId: user.id }))}>Play</button>{" "}
+                            <button onClick={() =>dispatch(feedPet({ petId: pet.id, userId: user.id }))}>Feed</button>{" "}
+                        </div>
+                    </div>
+                ))}
+            </div>
             ) : (
-                <p>You have no pets yet. Visit the <Link to="/lab">Lab</Link> to generate one, 
-                or the <Link to="/pound">Pound</Link> to adopt one!</p>            
+            <p>
+                You have no pets yet. Visit the <Link to="/lab">Lab</Link> to generate one,
+                or the <Link to="/pound">Pound</Link> to adopt one!
+            </p>
             )}
         </div>
     );

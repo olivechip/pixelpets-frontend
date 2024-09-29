@@ -1,18 +1,20 @@
 import { useLocation, Link } from 'react-router-dom';
 
-const Deleted = () => {
+const PetCreated = () => {
     const location = useLocation();
-    const { message } = location.state || {}; 
+    const { message } = location.state || {}; // Access the message from navigation state
 
     return (
         <div>
-            <h1>Pet Deleted</h1>
+            <h1>Pet Created!</h1>
+
             {message ? (
-                <p>{message}</p>
+                <p>{message}</p> 
             ) : (
-                <p>No pet was deleted.</p>
+                <p>No pet was generated.</p> 
             )}
             <div>
+
                 <Link to="/lab">Back to the Pixel Lab</Link><br />
                 <Link to="/dashboard">Back to Dashboard</Link>
             </div>
@@ -20,4 +22,4 @@ const Deleted = () => {
     );
 };
 
-export default Deleted;
+export default PetCreated;

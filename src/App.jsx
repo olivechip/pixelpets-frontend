@@ -11,9 +11,10 @@ import Dashboard from './Dashboard';
 import UserProfile from './UserProfile';
 import PetDetail from './PetDetail';
 import Lab from './Lab';
-import Generate from './Generate';
-import Delete from './Delete';
-import Deleted from './Deleted';
+import PetCreate from './PetCreate';
+import PetCreated from './PetCreated';
+import PetDelete from './PetDelete';
+import PetDeleted from './PetDeleted';
 import Pound from './Pound';
 import Adopt from './Adopt';
 import Adopted from './Adopted';
@@ -55,9 +56,10 @@ function App() {
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="/pets/:petId" element={<PetDetail />} />
         <Route path="/lab" element={<Lab />} />
-        <Route path="//lab/generate" element={<Generate />} />
-        <Route path="/lab/delete" element={<Delete />} />
-        <Route path="/lab/deleted" element={<Deleted />} />
+        <Route path="//lab/create" element={<PetCreate />} />
+        <Route path="//lab/created" element={<PetCreated />} />
+        <Route path="/lab/delete" element={<PetDelete />} />
+        <Route path="/lab/deleted" element={<PetDeleted />} />
         <Route path="/pound" element={<Pound />} />
         <Route path="/pound/adopt" element={<Adopt />} />
         <Route path="/pound/adopted" element={<Adopted />} />

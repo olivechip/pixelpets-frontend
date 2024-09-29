@@ -70,6 +70,12 @@ h1 {
   padding: 20px;
 }
 
+.scrollable-species-list {
+  max-height: 570px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+
 .colorless-list {
   list-style-type: none;
   padding: 0;
@@ -246,6 +252,11 @@ h1 {
   text-align: center;
   width: 200px;
   max-width: 30%; 
+}
+
+.pet-detail-card {
+  margin: 20px auto;
+  max-width: 400px;
 }
 
 .pet-image {

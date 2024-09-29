@@ -4,12 +4,11 @@ const Pound = () => {
     return (
         <div>
             <h1>The Pixel Pound</h1>
-            <p>Welcome to the Pixel Pound!
-                This is where kind-hearted souls can find the perfect Pixelpet for themselves. 
-            </p>
-            <p>Or, you know, where less-dedicated pet owners can conveniently "rehome" 
-                their virtual companions when the novelty wears off.
-            </p>
+            <div>
+                <p>Welcome to the Pixel Pound! This is where kind-hearted souls can find the perfect Pixelpet for themselves.</p>
+                <p>Or, you know, where less-dedicated pet owners can conveniently "rehome" their virtual companions when the novelty wears off.</p>
+            </div>
+
             <div>
                 <Link to="/pound/adopt">Adopt</Link>
                 <br />
