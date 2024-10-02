@@ -9,7 +9,10 @@ const Forbidden = () => {
 
   return (
     <div className="forbidden-page">
-      <h1>Access Forbidden</h1>
+      <div className="header">
+        <h1>Access Forbidden</h1>
+      </div>
+      
       <p>You don't have permission to access this page.</p>
       <div>
         <Link to="" onClick={handleGoBack}>Go Back</Link>

@@ -1,8 +1,8 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(247, 108, 108);
-  /* background-color: hwb(0 20% 80%); */
+  background-color: #FFD700;
+  margin: 0;
   padding: 0.5rem;
   font-size: 24px;
 }
@@ -15,35 +15,98 @@ nav ul {
   align-items: center;
 }
 
+.logo-link {
+  padding: 1rem 1rem 0.1rem;
+}
+
+.logo-img {
+  max-width: 70px;
+  max-height: 70px;
+}
+
 nav a {
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
+.tomorrow-light {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.tomorrow-regular {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .navbar-left {
-  margin-right: auto; /* Home stays on the left */
+  margin-right: auto;
 }
 
 .navbar-right {
   display: flex;
-  gap: 10px; /* Adds space between buttons */
+  gap: 10px;
 }
 
 body {
   text-align: center;
 }
 
-h1 {
-  margin-bottom:  20px;
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.message {
+.header .button-container-left {
+  position: absolute;
+  left: 20%;
+  margin-top: 10px;
+}
+
+.header .button-container-right {
+  position: absolute;
+  right: 20%;
+  margin-top: 10px;
+}
+
+.header button { 
+  font-family: "Tomorrow", sans-serif;
+  background-color: #FFD700;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 4px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.header button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  flex-grow: 1;
+  text-align: center; 
+  margin-bottom: 10px;
+}
+
+.success {
   background-color:rgb(227, 252, 231);
   color: rgb(37, 168, 4);
-
 }
+
 .error {
   background-color:rgb(255, 230, 230);
   color: red;
@@ -55,14 +118,18 @@ h1 {
   align-items: center;
 }
 
-.content {
+.content form{
   display: flex;
   width: 100%;
+  justify-content: space-around;
 }
 
 .left-section {
   flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .middle-section, .right-section {
@@ -70,27 +137,36 @@ h1 {
   padding: 20px;
 }
 
+.right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .scrollable-species-list {
-  max-height: 570px;
+  max-height: 580px;
   overflow-y: auto;
   border: 1px solid #ccc;
 }
 
 .colorless-list {
+  margin-top: 0;
   list-style-type: none;
-  padding: 0;
+  padding-top: 15px;
+  padding-left: 15px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
 }
 
 .colorless-pet {
+  width: 100px;
+  max-width: auto;
+  text-align: center;
+  box-sizing: border-box; 
   cursor: pointer;
   margin-bottom: 10px;
   margin-top: 10px;
   transition: border 0.3s;
-  width: 100px;
-  text-align: center;
 }
 
 .colorless-pet.selected {
@@ -99,23 +175,20 @@ h1 {
   padding: 5px;
 }
 
-.colorless-pet-name {
-  margin: 0
-}
-
 .colorless-pet.selected .colorless-pet-name {
   font-weight: bold;
 }
 
 .colorless-pet-img {
+  margin-top: 5px;
   width: 50px;
   height: 50px;
 }
 
 .colorless-pet-name {
-  margin-top: 5px;
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
+  margin: 0;
 }
 
 .dynamic-container {
@@ -163,7 +236,7 @@ h1 {
 }
 
 .red {
-  background-color: rgb(245, 111, 111);
+  background-color: rgb(233, 128, 128);
 }
 
 .red:hover {
@@ -237,6 +310,71 @@ h1 {
 
 .gender-group {
   margin-right: 0;
+}
+
+.confirm-button {
+  font-family: "Tomorrow", sans-serif;
+  background-color: #769ff7a7;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.confirm-button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.delete-button {
+  font-family: "Tomorrow", sans-serif;
+  background-color: #ff4c4c;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.cancel-button {
+  font-family: "Tomorrow", sans-serif;
+  background-color: #b1b1b1a7;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
 }
 
 .pet-cards-container {

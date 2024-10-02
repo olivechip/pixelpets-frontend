@@ -57,7 +57,10 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Login</h1>
+            <div className="header">
+                <h1>Login</h1>
+            </div>
+            
             {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email Address: </label>

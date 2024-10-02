@@ -2,16 +2,25 @@ import { useLocation, Link } from 'react-router-dom';
 
 const PetCreated = () => {
     const location = useLocation();
-    const { message } = location.state || {}; // Access the message from navigation state
+    const { message, pet } = location.state || {}; // Access the message from navigation state
 
     return (
         <div>
-            <h1>Pet Created!</h1>
-
+            <div className="header">
+                <h1>Pet Created!</h1>
+            </div>
+            
             {message ? (
-                <p>{message}</p> 
+                <>
+                    <div className="message">{message}</div>
+                    <img 
+                        className="dynamic-image" 
+                        src={`/src/assets/pixelpets/imgs/${pet.species}/happy_${pet.gender}_${pet.color}_${pet.species}.png`} 
+                        alt={`happy_${pet.gender}_${pet.color}_${pet.species}.png`}
+                    />
+                </>
             ) : (
-                <p>No pet was generated.</p> 
+                <p>No pet was created.</p> 
             )}
             <div>
 

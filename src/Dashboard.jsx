@@ -19,7 +19,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1>Dashboard</h1>
+            <div className="header">
+                <h1>Dashboard</h1>
+            </div>
 
             {loading && <p>Loading pets...</p>}
             {error && <div className="error">{error}</div>}

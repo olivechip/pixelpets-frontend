@@ -5,9 +5,10 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
     const { user } = useSelector(state => state.user);
     return (
         <nav>
+            <Link to="/" className="logo-link"><img className="logo-img" src="/src/assets/logo/small_logo.png"></img></Link>
             <ul className="navbar-left">
                 <li>
-                    <Link to="/">Home</Link> 
+                    <Link to="/">Pixelpets</Link> 
                 </li>
                 {isLoggedIn && (
                     <>

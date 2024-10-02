@@ -3,14 +3,24 @@ import { useLocation, Link } from 'react-router-dom';
 
 const Adopted = () => {
     const location = useLocation();
-    const { message } = location.state || {}; 
+    const { message, pet } = location.state || {}; 
 
+    console.log(message, pet)
     return (
         <div>
-            <h1>Pet Adopted!</h1>
-            {/* import happy png */}
+            <div className="header">
+                <h1>Pet Adopted!</h1>
+            </div>
+            
             {message ? (
-                <p>{message}</p>
+                <>
+                    <div className="message">{message}</div>
+                    <img 
+                            className="dynamic-image" 
+                            src={`/src/assets/pixelpets/imgs/${pet.species}/happy_${pet.gender}_${pet.color}_${pet.species}.png`} 
+                            alt={`happy_${pet.gender}_${pet.color}_${pet.species}.png`}
+                    />
+                </>
             ) : (
                 <p>No pet was adopted.</p>
             )}

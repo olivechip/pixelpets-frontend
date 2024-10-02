@@ -17,18 +17,37 @@ const Adopt = () => {
     }, [dispatch]);
 
     const handleAdopt = (petId) => {
-        const { id, name, color, species } = poundPets.find(pet => pet.id === petId)
+        const { id, name, species, color, gender } = poundPets.find(pet => pet.id === petId)
         dispatch(adoptPet(id));
+        console.log(id, name, species, color, gender)
         navigate('/pound/adopted', { 
-            state: { message: `You have adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}!` },
+            state: { 
+                message: `You have successfully adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}!`,
+                pet: {
+                    species: species,
+                    color: color,
+                    gender: gender
+                }
+            },
             replace: true
         });    
     };
 
     return (
         <div>
-            <h1>Adopt a Pet</h1>
+            <div className="header">
+                <div class="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
+                <h1>Adopt a Pet</h1>
+            </div>
 
+            <div>
+                <p>These Pixelpets are ready for a fresh start and a loving new home! <br /> 
+                    (No, they don't chew furniture or computer cords, we checked.)
+                </p>
+            </div>
+            
             {loading && <p>Loading pets...</p>} 
             {error && <div className="error">{error}</div>}
 
@@ -44,7 +63,7 @@ const Adopt = () => {
                                 <p>Species: {capitalizeFirstLetter(pet.species)}</p>
                                 <p>Color: {capitalizeFirstLetter(pet.color)}</p>
                                 <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
-                                <button onClick={() => handleAdopt(pet.id)}>Adopt</button>
+                                <button className="confirm-button" onClick={() => handleAdopt(pet.id)}>Adopt Me!</button>
                             </div>
                         </div>
                     ))}

@@ -70,7 +70,13 @@ const AccountEdit = () => {
 
     return (
         <div>
-            <h1>Edit Account Details</h1>
+            <div className="header">
+                <div class="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
+                <h1>Edit Account Details</h1>
+            </div>
+
             <div>
                 {error && <div className="error">{error}</div>}
                 <form onSubmit={handleSubmit}>

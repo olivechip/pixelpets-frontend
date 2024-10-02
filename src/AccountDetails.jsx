@@ -14,8 +14,10 @@ const AccountDetails = () => {
 
     return (
         <div>
-            <h1>Account Details</h1>
-
+            <div className="header">
+                <h1>Account Details</h1>
+            </div>
+            
             {loading && <p>Loading account details...</p>}
             {error && <div className="error">{error}</div>}
 

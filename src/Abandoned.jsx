@@ -3,13 +3,23 @@ import { useLocation, Link } from 'react-router-dom';
 
 const Abandoned = () => {
     const location = useLocation();
-    const { message } = location.state || {}; 
+    const { message, pet } = location.state || {}; 
 
     return (
         <div>
-            <h1>Pet Abandoned</h1>
+            <div className="header">
+                <h1>Pet Abandoned</h1>
+            </div>
+
             {message ? (
-                <p>{message}</p>
+                <>
+                    <div className="message">{message}</div>
+                    <img 
+                            className="dynamic-image" 
+                            src={`/src/assets/pixelpets/imgs/${pet.species}/sad_${pet.gender}_${pet.color}_${pet.species}.png`} 
+                            alt={`sad_${pet.gender}_${pet.color}_${pet.species}.png`}
+                    />
+                </>
             ) : (
                 <p>No pet was abandoned.</p>
             )}

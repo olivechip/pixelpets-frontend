@@ -19,7 +19,9 @@ const PetDetail = () => {
 
     return (
         <div>
-            <h1>Pet Details</h1>
+            <div className="header">
+                <h1>Pet Details</h1>
+            </div>
 
             {loading && <p>Loading pet details...</p>}
             {error && <div className="error">{error}</div>}

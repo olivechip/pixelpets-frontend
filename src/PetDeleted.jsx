@@ -6,14 +6,20 @@ const PetDeleted = () => {
 
     return (
         <div>
-            <h1>Pet Deleted</h1>
-
+            <div className="header">
+                <h1>Pet Deleted</h1>
+            </div>
+            
             {message ? (
                 <>
-                    <p>{message}</p>
-                    <img src={"/src/assets/blood_splat.png"} style={{ width: '300px', height: '300px' }} alt="Deleted" />                </>
+                    <div className="message">{message}</div>
+                    <img src={"/src/assets/deleted_zap.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
+                </>
             ) : (
-                <p>No pet was deleted.</p>
+                <>
+                    <p>No pet was deleted.</p>
+                    <img src={"/src/assets/deleted_not.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
+                </>
             )}
 
             <div>

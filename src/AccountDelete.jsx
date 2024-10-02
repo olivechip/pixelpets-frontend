@@ -73,7 +73,12 @@ const AccountDelete = () => {
     console.log(user)
     return (
         <div>
-            <h1>Delete Account</h1>
+            <div className="header">
+                <div class="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
+                <h1>Delete Account</h1>
+            </div>
 
             {user && (
                 <div>

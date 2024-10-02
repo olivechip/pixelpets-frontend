@@ -28,18 +28,25 @@ const PetDelete = () => {
         const { id, name, color, species } = pets.find(pet => pet.id === petId);
         dispatch(deletePet(id));
         navigate('/lab/deleted', {
-            state: { message: `You have deleted ${name}, the ${color} ${species}.` },
+            state: { message: `You have deleted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}.` },
             replace: true
         });
     };
 
     return (
         <div>
-            <h1>Delete a Pet</h1>
+            <div className="header">
+                <div class="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
+                <h1>Delete a Pet</h1>
+            </div>
+
             <div>
-                <p>Deleting a Pixelpet is a permanent and irreversible action.</p>
-                <p>Please consider putting your pet up for adoption at the <Link to="/pound">Pixel Pound</Link> instead, where it can find a new loving home.</p>
-                <p>If you're absolutely certain you want to proceed with deletion, you can do so here.</p>
+                <p style={{ color: "red" }}>Deleting a Pixelpet is a permanent and irreversible action.</p>
+                <p>Please consider putting your pet up for adoption at the <Link to="/pound">Pixel Pound</Link> instead, where it can find a new loving home.<br />
+                    If you're absolutely certain you want to proceed with deletion, you can do so here.
+                </p>
             </div>
 
             {loading && <p>Loading your pets...</p>}
@@ -60,11 +67,11 @@ const PetDelete = () => {
                                 {confirmDelete[pet.id] ? ( 
                                     <>
                                         <p style={{ color: "red" }}>Are you sure you want to delete this pet?</p> 
-                                        <button style={{ margin: 0 }} onClick={() => handleCancelDelete(pet.id)}>Cancel</button><br />
-                                        <button onClick={() => handleDelete(pet.id)}>Confirm Delete</button>
+                                        <button className="cancel-button" onClick={() => handleCancelDelete(pet.id)}>Cancel</button><br />
+                                        <button className="delete-button" onClick={() => handleDelete(pet.id)}>Confirm Delete</button>
                                     </>
                                 ) : ( 
-                                    <button onClick={() => handleDeleteClick(pet.id)}>Delete</button> 
+                                    <button className="delete-button" onClick={() => handleDeleteClick(pet.id)}>Delete</button> 
                                 )}
                             </div>
                         </div>

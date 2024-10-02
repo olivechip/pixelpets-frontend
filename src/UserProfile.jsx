@@ -18,7 +18,9 @@ const UserProfile = () => {
 
     return (
         <div>
-            <h1>User Profile</h1>
+            <div className="header">
+                <h1>User Profile</h1>
+            </div>
 
             {loading && <p>Loading user profile...</p>}
             {error && <div className="error">{error}</div>}
