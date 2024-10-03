@@ -4,8 +4,8 @@ This repository contains the frontend code for Pixelpets, a web application insp
 
 **Disclaimer:**  I do not own or claim any rights to the Neopets images used in this project. As of October 2024, all Neopets images are the property of World of Neopia, Inc.
 
-[alt text](image.png)
-[alt text](image-1.png)
+(image.png)
+(image-1.png)
 
 ## Getting Started
 
@@ -50,8 +50,8 @@ Contributions are welcome! If you find any bugs or have suggestions for new feat
 
 ## Contact
 
-* Oliver C - [linked](https://www.linkedin.com/in/ochang89/)
+* Oliver C - [https://www.linkedin.com/in/ochang89/]
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the `LICENSE.txt` file for details.
