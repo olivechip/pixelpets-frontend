@@ -35,7 +35,7 @@ const UserProfile = () => {
                     </p>
 
                     {/* Pets Owned Info */}
-                    <h1>Owned Pets</h1>
+                    <h2>Owned Pets</h2>
                     {pets.length > 0 ? (
                         <div className="pet-cards-container">
                             {pets.map((pet) => {
