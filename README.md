@@ -1,11 +1,11 @@
 # Pixelpets - Frontend
 
-This repository contains the frontend code for Pixelpets, a web application inspired by Neopets where users can create and customize their own virtual pets.
+This repository contains the frontend code for Pixelpets, a web application inspired by the beloved 90s game, Neopets, where users can create and customize their own virtual pets.
 
 **Disclaimer:**  I do not own or claim any rights to the Neopets images used in this project. As of October 2024, all Neopets images are the property of World of Neopia, Inc.
 
-![Screenshot of Pixelpets application showing pet creation]![alt text](image.png)
-![Screenshot of Pixelpets application showing pet adoption]![alt text](image-1.png)
+[alt text](image.png)
+[alt text](image-1.png)
 
 ## Getting Started
 
