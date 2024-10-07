@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserById } from './redux/store';
 
 const AccountDetails = () => {
     const { user } = useSelector(state => state.user);
     const { profile, loading, error } = useSelector(state => state.userProfile);
+    const location = useLocation();
+    const { message } = location.state || {};
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,6 +17,10 @@ const AccountDetails = () => {
 
     return (
         <div>
+            <p className="account-message">
+                <div>{message}</div>
+            </p>
+
             <div className="header">
                 <h1>Account Details</h1>
             </div>

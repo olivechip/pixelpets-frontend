@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { update } from './redux/store';
 
 const AccountEdit = () => {
     const { user } = useSelector(state => state.user);
@@ -10,6 +11,7 @@ const AccountEdit = () => {
     });
     const [error, setError] = useState(null);
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -36,11 +38,12 @@ const AccountEdit = () => {
         }
 
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`/api/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     ...formData, 
@@ -53,7 +56,8 @@ const AccountEdit = () => {
                 const updatedUser = await response.json();
                 console.log('Profile updated successfully:', updatedUser);
 
-                navigate(`/account`); // Redirect to the user profile page
+                dispatch(update(updatedUser));
+                navigate(`/account`, { state: { message: `Your account has been updated.` }});
             } else {
                 const errorData = await response.json();
                 console.error('Profile update failed:', errorData.error);
@@ -63,15 +67,12 @@ const AccountEdit = () => {
             console.error('Error during profile update:', error);
             setError('An error occurred during profile update. Please try again later.');
         }
-
-        // should probably clear password fields after submission??
-
     };
 
     return (
         <div>
             <div className="header">
-                <div class="button-container-left">
+                <div className="button-container-left">
                     <button onClick={() => navigate(-1)}>Back</button>
                 </div>
                 <h1>Edit Account Details</h1>

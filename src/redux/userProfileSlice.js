@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const fetchUserById = createAsyncThunk('userProfile/fetchUserById', async (userId) => {
     const token = localStorage.getItem('token'); 
     const response = await fetch(`/api/users/${userId}`, {
-        headers: { 'Authorization': `${token}` } 
+        headers: { 'Authorization': `Bearer ${token}` } 
     });
 
     if (!response.ok) {

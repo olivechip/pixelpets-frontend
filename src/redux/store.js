@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import userReducer, { login, logout, register } from './userSlice';
+import userReducer, { register, login, update, logout } from './userSlice';
 import userProfileReducer, { fetchUserById } from './userProfileSlice';
 import petReducer, { fetchPetById, fetchUserPets, deletePet, playWithPet, feedPet, petAnotherPet } from './petSlice';
 import poundReducer, { fetchPoundPets, abandonPet, adoptPet } from './poundSlice';
@@ -27,7 +27,7 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor, 
-    login, logout, register, 
+    register, login, update, logout, 
     fetchUserById,
     fetchPetById, fetchUserPets, deletePet, playWithPet, feedPet, petAnotherPet, 
     fetchPoundPets, abandonPet, adoptPet 

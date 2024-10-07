@@ -36,14 +36,14 @@ const Login = () => {
             });
 
             if (response.ok){
-                const { token, user } = await response.json();
+                const { token, refreshToken, user } = await response.json();
                 console.log('User logged in successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
+                localStorage.setItem('refreshToken', refreshToken);
                 dispatch(login(user));
                 navigate('/');
-
             } else {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData.error);

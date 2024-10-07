@@ -12,7 +12,7 @@ const PetCreated = () => {
             
             {message ? (
                 <>
-                    <div className="message">{message}</div>
+                    <div>{message}</div>
                     <img 
                         className="dynamic-image" 
                         src={`/src/assets/pixelpets/imgs/${pet.species}/happy_${pet.gender}_${pet.color}_${pet.species}.png`} 

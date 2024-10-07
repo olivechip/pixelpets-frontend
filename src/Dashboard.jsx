@@ -27,7 +27,7 @@ const Dashboard = () => {
             {error && <div className="error">{error}</div>}
 
             { message ? (
-                <div className="message">{message}</div>
+                <div>{message}</div>
             ) : null }
 
             {!loading && pets.length > 0 ? (
@@ -45,7 +45,7 @@ const Dashboard = () => {
                             <br />
                             {/* <h4>Stats</h4> */}
                             <p>Happiness: {pet.happiness}</p>
-                            <p>Hunger: {pet.hunger}</p>
+                            <p>Fullness: {pet.hunger}</p>
                             <p>Popularity: {pet.popularity}</p>
 
                             {/* Irrelevant at the moment */}
@@ -60,7 +60,9 @@ const Dashboard = () => {
             </div>
             ) : (
             <p>
-                You have no pets yet. Visit the <Link to="/lab">Lab</Link> to generate one,
+                You have no pets. <br />
+                
+                Visit the <Link to="/lab">Lab</Link> to generate one,
                 or the <Link to="/pound">Pound</Link> to adopt one!
             </p>
             )}

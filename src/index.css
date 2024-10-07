@@ -52,8 +52,41 @@ nav a {
   gap: 10px;
 }
 
+.search-box {
+  display: flex;
+  align-items: center; 
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  position: relative;
+  margin-top: 5px;
+}
+
+.search-box input {
+  border: none;
+  flex: 1;
+  padding: 8px; 
+  outline: none;
+  border-radius: 10px;
+  padding-left: 30px;
+}
+
+.search-box button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px; 
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 body {
   text-align: center;
+}
+
+.account-message {
+  color: red;
+  font-style: italic;
 }
 
 .header {
@@ -412,4 +445,19 @@ h1 {
 
 .pet-details button {
   margin: 10px 0;
+}
+
+.user-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 200px;
+  max-width: 30%; 
 }

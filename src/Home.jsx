@@ -13,7 +13,7 @@ const Home = () => {
         <div>
             { isLoggedIn && user ? (
                 <>
-                    <div className="message">
+                    <div className="welcome-message">
                         <h1>{message || `Welcome back, ${user.username}!`}</h1>
                     </div>
                     <div> 
@@ -22,10 +22,14 @@ const Home = () => {
                 </>
             ) : 
             <div> 
-                <div className="message">
+                <p className="account-message">
                     <div>{message}</div>
+                </p>
+
+                <div className="header">
+                    <h1>Welcome to Pixel Pets!</h1>
                 </div>
-                <h1>Welcome to Pixel Pets!</h1>
+                
                 <p>Create your account and start adopting adorable virtual pets!</p>
                 <div>
                     <Link to="/login">Login</Link>

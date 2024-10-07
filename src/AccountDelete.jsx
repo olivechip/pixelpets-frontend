@@ -22,11 +22,15 @@ const AccountDelete = () => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
         dispatch(logout());
-        persistor.purge();
     
-        // delayed redirect
+        // clear tokens and persist storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('expirationTime');
+        persistor.purge();
+
+        // delayed redirect to home
         setTimeout(() => {
             navigate('/', { state: { message: `Your account has been deleted.` }});
         }, 100);
@@ -43,11 +47,12 @@ const AccountDelete = () => {
         const password = e.target.password.value;
 
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`/api/users/${user.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     username: formData.username,

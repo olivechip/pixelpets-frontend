@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/pets/${petId}`, {
-        headers: { 'Authorization': `${token}` }
+        headers: { 'Authorization': `Bearer ${token}` }
     });
 
     if (!response.ok) {
@@ -17,7 +17,7 @@ const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
 const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/users/${userId}/pets`, {
-        headers: { 'Authorization': `${token}` }
+        headers: { 'Authorization': `Bearer ${token}` }
     });
   
     if (!response.ok) {
@@ -33,7 +33,7 @@ const deletePet = createAsyncThunk('pets/deletePet', async (petId, { dispatch, r
     const response = await fetch(`/api/pets/${petId}`, {
         method: 'DELETE',
         headers: {
-            'Authorization': `${token}`
+            'Authorization': `Bearer ${token}`
         }
     });
 
@@ -50,7 +50,7 @@ const playWithPet = createAsyncThunk('pets/playWithPet', async ({ petId, userId 
     const response = await fetch(`/api/pets/${petId}/play`, {
         method: 'POST',
         headers: {
-            'Authorization': `${token}` 
+            'Authorization': `Bearer ${token}` 
         }
     });
     
@@ -73,7 +73,7 @@ const feedPet = createAsyncThunk('pets/feedPet', async ({ petId, userId }, { dis
     const response = await fetch(`/api/pets/${petId}/feed`, {
         method: 'POST',
         headers: {
-            'Authorization': `${token}` 
+            'Authorization': `Bearer ${token}` 
         }
     });
   
@@ -97,7 +97,7 @@ const petAnotherPet = createAsyncThunk('pets/petAnotherPet', async (petId, { rej
     const response = await fetch(`/api/pets/${petId}/pet`, {
         method: 'POST',
         headers: {
-            'Authorization': `${token}` 
+            'Authorization': `Bearer ${token}`
         }
     });
     // console.log(response)

@@ -1,8 +1,39 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, persistor } from './redux/store';
 
-const Navbar = ({ isLoggedIn, handleLogout }) => {
-    const { user } = useSelector(state => state.user);
+const Navbar = () => {
+    const {  isLoggedIn, user } = useSelector(state => state.user);
+    const [ search, setSearch ] = useState("");
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate(`/search/${search}`);
+    }
+
+    const handleLogout = () => {
+        dispatch(logout());
+    
+        // clear tokens and persist storage
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('expirationTime');
+        persistor.purge();
+
+        // delayed redirect to home
+        setTimeout(() => {
+            navigate('/');
+        }, 100);
+    };
+
     return (
         <nav>
             <Link to="/" className="logo-link"><img className="logo-img" src="/src/assets/logo/small_logo.png"></img></Link>
@@ -10,7 +41,7 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
                 <li>
                     <Link to="/">Pixelpets</Link> 
                 </li>
-                {isLoggedIn && (
+                {user && isLoggedIn && (
                     <>
                         <li>
                             <Link to="/dashboard">Dashboard</Link> 
@@ -24,7 +55,7 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
                     </>
                 )}
             </ul>
-            {!isLoggedIn ? (
+            {!user || !isLoggedIn ? (
             <ul className="navbar-right">
                 <li>
                     <Link to="/login">Login</Link>
@@ -35,6 +66,23 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
             </ul>
             ) : (
             <ul className="navbar-right">
+                <li>
+                    <form onSubmit={handleSubmit}>
+                        <div className="search-box">
+                            <input
+                                className="search"
+                                type="text" 
+                                name="search"
+                                value={search}
+                                onChange={handleChange}
+                                placeholder="Search Pixelpets"
+                            />
+                            <button type="submit">
+                                <i className="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </li>
                 <li>
                     <Link to={`/account`}>{user.username}</Link> 
                 </li>

@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const fetchPoundPets = createAsyncThunk('/pound/fetchPoundPets', async () => {
     const token = localStorage.getItem('token');
     const response = await fetch(`/api/pound`, {
-        headers: { 'Authorization': `${token}` }
+        headers: { 'Authorization': `Bearer ${token}` }
     });
   
     if (!response.ok) {
@@ -19,7 +19,7 @@ const abandonPet = createAsyncThunk('/pound/abandon', async (petId) => {
     const response = await fetch(`/api/pound/abandon/${petId}`, {
         method: 'POST',
         headers: {
-            'Authorization': `${token}`
+            'Authorization': `Bearer ${token}`
         }
     });
 
@@ -35,7 +35,7 @@ const adoptPet = createAsyncThunk('/pound/adopt', async (petId) => {
     const response = await fetch(`/api/pound/adopt/${petId}`, {
         method: 'POST',
         headers: {
-            'Authorization': `${token}`
+            'Authorization': `Bearer ${token}`
         }
     });
     

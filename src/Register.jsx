@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from './redux/store';
 
 const Register = () => {
+    const { user } = useSelector(state => state.user);
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -47,14 +48,14 @@ const Register = () => {
             });
 
             if (response.ok) {
-                const { token, user } = await response.json();
+                const { token, refreshToken, user } = await response.json();
                 console.log('User registered successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
+                localStorage.setItem('refreshToken', refreshToken);
                 dispatch(register(user));
                 navigate('/', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
-
             } else {
                 const errorData = await response.json();
                 console.error('Registration failed:', errorData.error);

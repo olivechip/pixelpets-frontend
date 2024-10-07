@@ -12,7 +12,7 @@ const PetDeleted = () => {
             
             {message ? (
                 <>
-                    <div className="message">{message}</div>
+                    <div>{message}</div>
                     <img src={"/src/assets/deleted_zap.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
                 </>
             ) : (

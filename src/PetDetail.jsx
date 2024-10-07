@@ -5,12 +5,11 @@ import { fetchPetById, petAnotherPet } from './redux/store';
 import { capitalizeFirstLetter } from './helpers/helpers';
 
 const PetDetail = () => {
-    const { petId } = useParams();
+    const { petId, petName } = useParams();
     const { user } = useSelector(state => state.user);
     const { selectedPet: pet, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
         
-    console.log(user, petId, pet)
     useEffect(() => {
         dispatch(fetchPetById(petId));
     }, [ petId, dispatch]);
@@ -39,14 +38,14 @@ const PetDetail = () => {
                                 <Link to={"/pound"}>The Pixel Pound</Link>
                             )}{" "}
                             {isOwner && "(me)"}
-                        </p>
+                        </p><br />
                         <p>Species: {capitalizeFirstLetter(pet.species)}</p>
                         <p>Color: {capitalizeFirstLetter(pet.color)}</p>
                         <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
                         <p>Birthdate: {pet.created_at ? new Date(pet.created_at).toLocaleDateString() : "Unknown"}</p>
                         <br />
                         <p>Happiness: {pet.happiness}</p>
-                        <p>Hunger: {pet.hunger}</p>
+                        <p>Fullness: {pet.hunger}</p>
                         <p>Popularity: {pet.popularity}</p>
                         <br />
                         <p>Last Played: {pet.last_played? new Date(pet.last_played).toLocaleString(): "Never"}</p>
