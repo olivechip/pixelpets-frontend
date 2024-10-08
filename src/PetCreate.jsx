@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { capitalizeFirstLetter } from './helpers/helpers';
+import { validatePetName } from './helpers/validationUtils';
 
 const PetCreate = () => {
     const { user } = useSelector(state => state.user);
@@ -77,15 +78,13 @@ const PetCreate = () => {
 
     const handlePetCreate = async (e) => {
         e.preventDefault();
+        setPetNameError(null);
 
-        const trimmedName = petName.trim();
-        if (!trimmedName || trimmedName === "") {
-            setPetNameError("Pet name cannot be empty.");
-            return; 
-        }
-        if (trimmedName.length > 20) {
-            setPetNameError("Pet name cannot exceed 20 characters.");
-            return; 
+        // Pet name validation
+        const petNameError = validatePetName(petName);
+        if (petNameError) {
+            setPetNameError(petNameError);
+            return;
         }
 
         try {
@@ -99,7 +98,7 @@ const PetCreate = () => {
                 },
                 body: JSON.stringify({
                     owner_id: user.id,
-                    name: trimmedName,
+                    name: petName,
                     species: selectedSpecies,
                     color: selectedColor,
                     gender,
@@ -136,7 +135,7 @@ const PetCreate = () => {
                     <button onClick={() => navigate(-1)}>Back</button>
                 </div>
                 <h1>Create a Pet</h1>
-                <div class="button-container-right">
+                <div className="button-container-right">
                     <button type="submit" form="petForm">Create</button>
                 </div>
             </div>
@@ -189,15 +188,17 @@ const PetCreate = () => {
                                 <div className="input-group">
                                     <label htmlFor='petName'><b>PIXELPET NAME</b></label><br />
                                     <input
-                                        type="text" 
-                                        id="petName"
-                                        value={petName} 
+                                        name="petName"
+                                        type="text"
+                                        value={petName}  
                                         onChange={(e) => {
                                             setPetName(e.target.value);
                                             setPetNameError(null);
                                         }}
+                                        placeholder="name"
                                         required
-                                        max={20}
+                                        minLength="3"
+                                        maxLength="50"
                                     />
                                     {petNameError && (
                                         <div className="error">{petNameError}</div> 

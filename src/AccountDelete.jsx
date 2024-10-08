@@ -101,19 +101,26 @@ const AccountDelete = () => {
                                 value={formData.username}
                                 onChange={handleChange}
                                 placeholder="username"
+                                required
                             />
                             <br />
                             <label htmlFor="email">Email Address: </label>
-                            <input 
-                                name="email" 
-                                type="email" 
-                                value={formData.email} 
-                                onChange={handleChange} 
+                            <input
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 placeholder='email'
+                                required 
                             />
                             <br />
-                            <label htmlFor="password">Password: </label>
-                            <input name="password" type="password" placeholder='password'/>
+                            <label htmlFor="password">Password:</label>
+                            <input 
+                                name="password" 
+                                type="password" 
+                                placeholder='password' 
+                                required 
+                            />
                             <br />
                             <button type="submit">Confirm Deletion</button>
                         </form>

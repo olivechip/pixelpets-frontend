@@ -14,7 +14,6 @@ const validateUsername = (username) => {
     return null;
 };
   
-  
 const validateEmail = (email) => {
     const trimmedEmail = email.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
@@ -29,7 +28,6 @@ const validateEmail = (email) => {
     return null;
 };
   
-  
 const validatePassword = (password, confirmPassword) => {
     if (password !== confirmPassword) {
         return 'Passwords do not match';
@@ -39,4 +37,20 @@ const validatePassword = (password, confirmPassword) => {
     return null;
 };
 
-export { validateUsername, validateEmail, validatePassword };
+const validatePetName = (petName) => {
+    const trimmedPetName = petName.trim();
+    const allowedChars = /^[a-zA-Z0-9_-]+$/;
+  
+    if (!trimmedPetName || petName === "") {
+        return "Pet name cannot be empty.";
+    } else if (trimmedPetName.length > 50) {
+        return "Pet name cannot exceed 50 characters.";
+    } else if (trimmedPetName.length < 3) {
+        return "Pet name must be at least 3 characters long.";
+    } else if (!allowedChars.test(trimmedPetName)) {
+        return "Pet name can only contain letters, numbers, underscores, and hyphens.";
+    }
+    return null;
+};
+
+export { validateUsername, validateEmail, validatePassword, validatePetName };
