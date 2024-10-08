@@ -26,6 +26,7 @@ const Navbar = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('refreshTokenExpirationTime');
         persistor.purge();
 
         // delayed redirect to home

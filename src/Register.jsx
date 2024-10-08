@@ -35,7 +35,7 @@ const Register = () => {
         }
 
         try {
-            const response = await fetch('/api/users/register', {
+            const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,12 +48,14 @@ const Register = () => {
             });
 
             if (response.ok) {
-                const { token, refreshToken, user } = await response.json();
+                const { token, refreshToken, user, expirationTime, refreshTokenExpirationTime } = await response.json();
                 console.log('User registered successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
+                localStorage.setItem('expirationTime', expirationTime); 
+                localStorage.setItem('refreshTokenExpirationTime', refreshTokenExpirationTime);
                 dispatch(register(user));
                 navigate('/', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
             } else {

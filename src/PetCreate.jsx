@@ -132,7 +132,7 @@ const PetCreate = () => {
     return (
         <div className="container">
             <div className="header"> 
-                <div class="button-container-left">
+                <div className="button-container-left">
                     <button onClick={() => navigate(-1)}>Back</button>
                 </div>
                 <h1>Create a Pet</h1>

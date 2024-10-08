@@ -28,6 +28,7 @@ const AccountDelete = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('refreshTokenExpirationTime');
         persistor.purge();
 
         // delayed redirect to home
@@ -79,7 +80,7 @@ const AccountDelete = () => {
     return (
         <div>
             <div className="header">
-                <div class="button-container-left">
+                <div className="button-container-left">
                     <button onClick={() => navigate(-1)}>Back</button>
                 </div>
                 <h1>Delete Account</h1>

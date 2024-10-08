@@ -17,9 +17,7 @@ const AccountDetails = () => {
 
     return (
         <div>
-            <p className="account-message">
-                <div>{message}</div>
-            </p>
+            <p className="account-message">{message}</p>
 
             <div className="header">
                 <h1>Account Details</h1>

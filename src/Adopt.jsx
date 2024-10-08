@@ -36,7 +36,7 @@ const Adopt = () => {
     return (
         <div>
             <div className="header">
-                <div class="button-container-left">
+                <div className="button-container-left">
                     <button onClick={() => navigate(-1)}>Back</button>
                 </div>
                 <h1>Adopt a Pet</h1>

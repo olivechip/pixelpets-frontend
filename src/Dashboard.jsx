@@ -16,7 +16,7 @@ const Dashboard = () => {
             dispatch(fetchUserPets(user.id));
         }
     }, [user, dispatch]);
-
+    
     return (
         <div>
             <div className="header">

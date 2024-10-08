@@ -22,9 +22,7 @@ const Home = () => {
                 </>
             ) : 
             <div> 
-                <p className="account-message">
-                    <div>{message}</div>
-                </p>
+                <p className="account-message">{message}</p>
 
                 <div className="header">
                     <h1>Welcome to Pixel Pets!</h1>

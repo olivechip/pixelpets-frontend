@@ -24,7 +24,7 @@ const Login = () => {
         const password = e.target.password.value;
 
         try {
-            const response = await fetch('/api/users/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,13 +35,15 @@ const Login = () => {
                 })
             });
 
-            if (response.ok){
-                const { token, refreshToken, user } = await response.json();
+            if (response.ok) {
+                const { token, refreshToken, user, expirationTime, refreshTokenExpirationTime } = await response.json(); 
                 console.log('User logged in successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
+                localStorage.setItem('expirationTime', expirationTime); 
+                localStorage.setItem('refreshTokenExpirationTime', refreshTokenExpirationTime);
                 dispatch(login(user));
                 navigate('/');
             } else {

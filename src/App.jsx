@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, persistor } from './redux/store';
 
 import Home from './Home';
 import Register from './Register';
@@ -28,8 +29,24 @@ import NotFound from './NotFound';
 
 function App() {
   const { isLoggedIn } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  
+  const handleLogout = () => {
+    dispatch(logout());
+
+    // clear tokens and persist storage
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('expirationTime');
+    localStorage.removeItem('refreshTokenExpirationTime');
+    persistor.purge();
+
+    // delayed redirect to home
+    setTimeout(() => {
+        navigate('/');
+    }, 100);
+  };
 
   const refreshAccessToken = async () => { 
     try {
@@ -41,7 +58,7 @@ function App() {
         return;
       }
   
-      const response = await fetch('/api/auth/refresh', { // Replace with your refresh token endpoint
+      const response = await fetch('/api/auth/refresh', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,33 +67,42 @@ function App() {
       });
   
       if (!response.ok) {
-        const errorData = await response.json(); // Get error message from the server
+        const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to refresh access token');
       }
   
       const data = await response.json();
 
       localStorage.setItem('token', data.token); 
+      localStorage.setItem('expirationTime', data.expirationTime);
+      localStorage.setItem('refreshToken', data.refreshToken); 
+      localStorage.setItem('refreshTokenExpirationTime', data.refreshTokenExpirationTime);
     } catch (error) {
       console.error('Error refreshing token:', error);
       handleLogout();
     }
   };
-  
+
   useEffect(() => {
     const checkTokenExpiration = () => {
       const expirationTime = localStorage.getItem('expirationTime');
-  
-      // No need for jwt_decode here
-      if (expirationTime && new Date().getTime() > expirationTime) { 
-        refreshAccessToken();
+      
+      if (expirationTime && new Date().getTime() > expirationTime * 1000) { 
+        const refreshTokenExpirationTime = localStorage.getItem('refreshTokenExpirationTime');
+        
+        if (refreshTokenExpirationTime && new Date().getTime() > refreshTokenExpirationTime * 1000) {
+          handleLogout(); // Refresh token expired, log out the user
+        } else {
+          refreshAccessToken();
+        }
       }
     };
     
-    // checks every minute
-    const intervalId = setInterval(checkTokenExpiration, 60000);
+    // checks every 60 minutes, adjust if needed
+    const minutes = 60;
+    const intervalId = setInterval(checkTokenExpiration, minutes * 60 * 1000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [handleLogout]);
 
   return (
     <>
