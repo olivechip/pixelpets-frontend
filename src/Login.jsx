@@ -64,22 +64,23 @@ const Login = () => {
             </div>
             
             {error && <div className="error">{error}</div>}
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email Address: </label>
-                <input 
-                    name="email" 
-                    type="email" 
-                    value={formData.email} 
-                    onChange={handleChange} 
-                    placeholder='email'
-                />
-                <br />
-                <label htmlFor="password">Password: </label>
-                <input name="password" type="password" placeholder='password'/>
-                <br />
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <label htmlFor="email">Email Address: </label>
+                    <input 
+                        name="email" 
+                        type="email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        placeholder='email'
+                        required
+                    />
+                    <br />
+                    <label htmlFor="password">Password: </label>
+                    <input name="password" type="password" placeholder='password' required/>
+                    <br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>  
     );
 };
 

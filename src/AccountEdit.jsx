@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { update } from './redux/store';
+import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
 
 const AccountEdit = () => {
     const { user } = useSelector(state => state.user);
@@ -28,13 +29,25 @@ const AccountEdit = () => {
 
         const newPassword = e.target.newPassword.value;
         const confirmPassword = e.target.confirmPassword.value;
-        
         const currentPassword = e.target.currentPassword.value;
 
-        // Basic password validation
-        if (newPassword && newPassword !== confirmPassword) {
-            setError('New passwords do not match');
+        // Input validation 
+        const usernameError = validateUsername(formData.username);
+        if (usernameError) {
+            setError(usernameError);
             return;
+        }
+        const emailError = validateEmail(formData.email);
+        if (emailError) {
+            setError(emailError);
+            return;
+        }
+        if (newPassword) { 
+            const passwordError = validatePassword(newPassword, confirmPassword);
+            if (passwordError) {
+              setError(passwordError);
+              return;
+            }
         }
 
         try {
@@ -47,7 +60,7 @@ const AccountEdit = () => {
                 },
                 body: JSON.stringify({
                     ...formData, 
-                    newPassword,
+                    newPassword: newPassword !== "" ? newPassword : undefined,
                     currentPassword
                 })
             });
@@ -81,44 +94,52 @@ const AccountEdit = () => {
             <div>
                 {error && <div className="error">{error}</div>}
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username: </label>
+                    <label htmlFor="username">Username:</label>
                     <input
                         name="username"
                         type="text"
                         value={formData.username}
                         onChange={handleChange}
                         placeholder="username"
+                        required
+                        minLength="3"
+                        maxLength="50"
+                        pattern="[a-zA-Z0-9_\-]+"
                     />
                     <br />
-                    <label htmlFor="email">Email Address: </label>
+                    <label htmlFor="email">Email Address:</label>
                     <input
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="email"
+                        required
+                        maxLength="255"
                     />
                     <br />
-                    <label htmlFor="newPassword">New Password: </label>
-                    <input 
-                        name="newPassword" 
-                        type="password" 
-                        placeholder="new password" 
+                    <label htmlFor="newPassword">New Password:</label>
+                    <input
+                        name="newPassword"
+                        type="password"
+                        placeholder="new password"
+                        minLength="8" 
                     />
                     <br />
-                    <label htmlFor="confirmPassword">Confirm New Password: </label>
-                    <input 
-                        name="confirmPassword" 
-                        type="password" 
-                        placeholder="confirm new password" 
+                    <label htmlFor="confirmPassword">Confirm New Password:</label>
+                    <input
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="confirm new password"
+                        minLength="8" 
                     />
                     <br />
-                    <label htmlFor="currentPassword">Current Password: </label>
-                    <input 
-                        name="currentPassword" 
-                        type="password" 
-                        placeholder="current password" 
-                        required 
+                    <label htmlFor="currentPassword">Current Password:</label>
+                    <input
+                        name="currentPassword"
+                        type="password"
+                        placeholder="current password"
+                        required
                     />
                     <br />
                     <button type="submit">Submit</button>

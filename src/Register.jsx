@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { register } from './redux/store';
+import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
 
 const Register = () => {
-    const { user } = useSelector(state => state.user);
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -26,14 +26,23 @@ const Register = () => {
         e.preventDefault();
         setError(null);
 
-        const password = e.target.password.value;
-        const confirmPassword = e.target.confirmPassword.value;
-
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
+        // Input validation 
+        const usernameError = validateUsername(formData.username);
+        if (usernameError) {
+            setError(usernameError);
             return;
         }
-
+        const emailError = validateEmail(formData.email);
+        if (emailError) {
+            setError(emailError);
+            return;
+        }
+        const passwordError = validatePassword(e.target.password.value, e.target.confirmPassword.value);
+        if (passwordError) {
+            setError(passwordError);
+            return;
+        }
+        
         try {
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
@@ -43,7 +52,7 @@ const Register = () => {
                 body: JSON.stringify({
                     username: formData.username,
                     email: formData.email,
-                    password
+                    password: e.target.password.value
                 })
             });
 
@@ -77,30 +86,48 @@ const Register = () => {
             
             <div>
                 {error && <div className="error">{error}</div>}
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username: </label>
+                <form className="register-form" onSubmit={handleSubmit}>
+                    <label htmlFor="username">Username:</label>
                     <input
                         name="username"
                         type="text"
-                        value={formData.username}
+                        value={formData.username} 
                         onChange={handleChange}
                         placeholder="username"
+                        required
+                        minLength="3" 
+                        maxLength="50"
+                        pattern="[a-zA-Z0-9_\-]+" 
                     />
                     <br />
-                    <label htmlFor="email">Email Address: </label>
+                    <label htmlFor="email">Email Address:</label>
                     <input
                         name="email"
-                        type="email"
-                        value={formData.email}
+                        type="email" 
+                        value={formData.email} 
                         onChange={handleChange}
                         placeholder="email"
+                        required
+                        maxLength="255" 
                     />
                     <br />
-                    <label htmlFor="password">Password: </label>
-                    <input name="password" type="password" placeholder="password" />
+                    <label htmlFor="password">Password:</label>
+                    <input 
+                        name="password" 
+                        type="password" 
+                        placeholder="password" 
+                        required 
+                        minLength="8" 
+                    />
                     <br />
-                    <label htmlFor="confirmPassword">Confirm Password: </label>
-                    <input name="confirmPassword" type="password" placeholder="confirm password" />
+                    <label htmlFor="confirmPassword">Confirm Password:</label>
+                    <input 
+                        name="confirmPassword" 
+                        type="password" 
+                        placeholder="confirm password"
+                        required 
+                        minLength="8" 
+                    />
                     <br />
                     <button type="submit">Submit</button>
                 </form>

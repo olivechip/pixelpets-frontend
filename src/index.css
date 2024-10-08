@@ -89,6 +89,69 @@ body {
   font-style: italic;
 }
 
+.register-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.register-form button {
+  width: 300px;
+  background-color: #5471f6;
+  color: white;
+  padding: 14px 20px;
+  margin: 24px 0;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.login-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  width: 300px;
+  background-color: #5471f6;
+  color: white;
+  padding: 14px 20px;
+  margin: 24px 0;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:hover   
+ {
+  opacity: 0.8;
+}
+
 .header {
   display: flex;
   justify-content: center;
