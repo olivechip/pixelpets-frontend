@@ -17,7 +17,9 @@ const Home = () => {
                     <div className="welcome-message">
                         <h1>{message || `Welcome back, ${user.username}!`}</h1>
                     </div>
+
                     <Tutorial />
+                    
                     <div> 
                         <Link to="/dashboard">Go to Dashboard</Link>
                     </div>
