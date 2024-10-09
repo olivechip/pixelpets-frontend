@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import Tutorial from './Tutorial';
 
 const Home = () => {
     const { isLoggedIn, user } = useSelector(state => state.user);
@@ -16,6 +17,7 @@ const Home = () => {
                     <div className="welcome-message">
                         <h1>{message || `Welcome back, ${user.username}!`}</h1>
                     </div>
+                    <Tutorial />
                     <div> 
                         <Link to="/dashboard">Go to Dashboard</Link>
                     </div>

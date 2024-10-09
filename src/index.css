@@ -89,6 +89,11 @@ body {
   font-style: italic;
 }
 
+.account-message-update {
+  color: #5471f6;
+  font-style: italic;
+}
+
 .user-form {
   width: 300px;
   margin: 0 auto;

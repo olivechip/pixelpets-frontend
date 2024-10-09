@@ -75,8 +75,7 @@ const AccountDelete = () => {
             setError('An error occurred during deletion. Please try again later.');
         }
     }
-4
-    console.log(user)
+    
     return (
         <div>
             <div className="header">
@@ -91,7 +90,7 @@ const AccountDelete = () => {
                     {error && <div className="error">{error}</div>}
                     <p>Account deletion is irreversible. Pets will be sent to the pound.</p>
                     {!deleteForm ? (
-                        <button onClick={showDeleteForm}>Continue</button>
+                        <button className="delete-button" onClick={showDeleteForm}>Continue</button>
                     ) : (
                         <form className="user-form" onSubmit={handleDeletion}>
                             <label htmlFor="username">Username: </label>

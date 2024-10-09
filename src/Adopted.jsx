@@ -5,7 +5,6 @@ const Adopted = () => {
     const location = useLocation();
     const { message, pet } = location.state || {}; 
 
-    console.log(message, pet)
     return (
         <div>
             <div className="header">
