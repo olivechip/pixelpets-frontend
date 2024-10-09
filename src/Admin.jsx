@@ -1,62 +1,47 @@
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import { capitalizeFirstLetter } from './helpers/helpers';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "./helpers/helpers";
 
-const SearchResults = () => {
-    const { query } = useParams();
-    const [ petResults, setPetResults ] = useState(null);
-    const [ userResults, setUserResults ] = useState(null);
+const Admin = () => {
+    const [ userResults, setUserResults ] = useState([]);
+    const [ petResults, setPetResults ] = useState([]);
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState(null);
     
     useEffect(() => {
-        const fetchSearchResults = async() => {
+        const fetchAdminData = async() => {
             setLoading(true);
             setError(null);
 
             try {
-                const token = localStorage.getItem('token');
-                
-                const petResponse = await fetch(`/api/pets/search`, { 
-                    method: 'POST',
+                const dataResponse = await fetch(`/api/admin`, { 
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ keyword: query }),
-                });
-                
-                const userResponse = await fetch(`/api/users/search`, { 
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ keyword: query }),
                 });
 
-                if (!petResponse.ok || !userResponse.ok) {
+                if (!dataResponse.ok) {
                     throw new Error('Network response was not ok');
                 }
 
-                const petData = await petResponse.json();
-                const userData = await userResponse.json();
+                const data = await dataResponse.json();
 
-                setPetResults(petData);
-                setUserResults(userData);
+                setUserResults(data[0]);
+                setPetResults(data[1]);
             } catch (error) {
                 setError(error);
             } finally {
                 setLoading(false);
             }
         };
-    fetchSearchResults();
-    }, [query]);
-    
+        fetchAdminData();
+    }, []);
+
     return (
         <div>
             <div className="header">
-                <h1>Search Results</h1>
+                <h1>Admin Data</h1>
             </div>
 
             {loading && <p>Loading results...</p>} 
@@ -78,7 +63,13 @@ const SearchResults = () => {
                                         </Link>
                                     </p>
                                     <p>
+                                        <b>Email: </b>{user.email}
+                                    </p>
+                                    <p>
                                         <b>Joined: </b>{new Date(user.created_at).toLocaleDateString()}
+                                    </p>
+                                    <p>
+                                        <b>Last Updated: </b>{new Date(user.updated_at).toLocaleDateString()}
                                     </p>
                                 </div>
                             ))}
@@ -97,22 +88,34 @@ const SearchResults = () => {
                                     </Link>
                                     <div className="pet-details">
                                         <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3>
+                                        <p>
+                                            Owner: {" "}
+                                            {pet.owner_name ? (
+                                                <Link to={`/users/${pet.owner_id}`}>{pet.owner_name}</Link>
+                                            ) : (
+                                                <Link to={"/pound"}>The Pixel Pound</Link>
+                                            )}{" "}
+                                        </p><br />
                                         <p>Species: {capitalizeFirstLetter(pet.species)}</p>
                                         <p>Color: {capitalizeFirstLetter(pet.color)}</p>
                                         <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
+                                        <p>Birthdate: {pet.created_at ? new Date(pet.created_at).toLocaleDateString() : "Unknown"}</p>
+                                        <br />
+                                        <p>Happiness: {pet.happiness}</p>
+                                        <p>Fullness: {pet.hunger}</p>
+                                        <p>Popularity: {pet.popularity}</p>
+                                        <br />
+                                        <p>Last Played: {pet.last_played? new Date(pet.last_played).toLocaleString(): "Never"}</p>
+                                        <p>Last Fed: {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : "Never"}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </>
                 )}
-                {/* No Results Message */}
-                {!loading && (!petResults || petResults.length === 0) && (!userResults || userResults.length === 0) && (
-                    <p>No results found for your search term.</p>
-                )}
             </div>
         </div>
     );
 }
 
-export default SearchResults;
+export default Admin;

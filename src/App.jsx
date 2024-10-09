@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, persistor } from './redux/store';
 
+import Admin from './Admin';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
@@ -109,6 +110,7 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/admin" element={<Admin />} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
