@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPetById, petAnotherPet } from './redux/store';
 import { capitalizeFirstLetter } from './helpers/helpers';
@@ -9,6 +9,7 @@ const PetDetail = () => {
     const { user } = useSelector(state => state.user);
     const { selectedPet: pet, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
         
     useEffect(() => {
         dispatch(fetchPetById(petId));
@@ -19,6 +20,9 @@ const PetDetail = () => {
     return (
         <div>
             <div className="header">
+                <div className="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
                 <h1>Pet Details</h1>
             </div>
 

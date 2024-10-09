@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserById, fetchUserPets, petAnotherPet } from './redux/store';
 import { capitalizeFirstLetter } from './helpers/helpers';
@@ -10,6 +10,7 @@ const UserProfile = () => {
     const { profile, loading, error } = useSelector(state => state.userProfile);
     const { pets } = useSelector(state => state.pets);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchUserById(userId))
@@ -19,6 +20,9 @@ const UserProfile = () => {
     return (
         <div>
             <div className="header">
+                <div className="button-container-left">
+                    <button onClick={() => navigate(-1)}>Back</button>
+                </div>
                 <h1>User Profile</h1>
             </div>
 

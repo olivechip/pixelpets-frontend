@@ -93,7 +93,7 @@ const AccountDelete = () => {
                     {!deleteForm ? (
                         <button onClick={showDeleteForm}>Continue</button>
                     ) : (
-                        <form onSubmit={handleDeletion}>
+                        <form className="user-form" onSubmit={handleDeletion}>
                             <label htmlFor="username">Username: </label>
                             <input
                                 name="username"
@@ -122,7 +122,7 @@ const AccountDelete = () => {
                                 required 
                             />
                             <br />
-                            <button type="submit">Confirm Deletion</button>
+                            <button className="delete-button" type="submit">Confirm Deletion</button>
                         </form>
                     )}
                 </div>

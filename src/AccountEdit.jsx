@@ -93,7 +93,7 @@ const AccountEdit = () => {
 
             <div>
                 {error && <div className="error">{error}</div>}
-                <form onSubmit={handleSubmit}>
+                <form className="user-form" onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
                         name="username"

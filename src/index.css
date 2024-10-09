@@ -89,7 +89,7 @@ body {
   font-style: italic;
 }
 
-.register-form {
+.user-form {
   width: 300px;
   margin: 0 auto;
   padding: 30px;
@@ -97,7 +97,7 @@ body {
   border-color: black;
 }
 
-.register-form input {
+.user-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -107,7 +107,7 @@ body {
   box-sizing: border-box;
 }
 
-.register-form button {
+.user-form button {
   width: 300px;
   background-color: #5471f6;
   color: white;
@@ -118,37 +118,23 @@ body {
   cursor: pointer;
 }
 
-.login-form {
-  width: 300px;
-  margin: 0 auto;
-  padding: 30px;
-  border-radius: 5px;
-  border-color: black;
-}
-
-.login-form input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-sizing: border-box;
-}
-
-.login-form button {
-  width: 300px;
-  background-color: #5471f6;
-  color: white;
-  padding: 14px 20px;
-  margin: 24px 0;
+.user-form .delete-button{
+  font-family: "Tomorrow", sans-serif;
+  background-color: #ff4c4c;
   border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   border-radius: 20px;
-  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
-button:hover   
- {
+button:hover {
   opacity: 0.8;
 }
 
@@ -426,6 +412,27 @@ h1 {
 }
 
 .confirm-button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.edit-button {
+  font-family: "Tomorrow", sans-serif;
+  background-color: #FFD700;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover {
   transform: scale(1.1);
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
 }

@@ -45,8 +45,8 @@ const AccountDetails = () => {
                     </p>
 
                     <div>
-                        <Link to={`/account/edit`} className="button"><button>Edit Account</button></Link><br />
-                        <Link to={`/account/delete`} className="button"><button>Delete Account</button></Link>
+                        <Link to={`/account/edit`}><button className="edit-button">Edit Account</button></Link><br />
+                        <Link to={`/account/delete`}><button className="delete-button">Delete Account</button></Link>
                     </div>
                 </div>
             )}
