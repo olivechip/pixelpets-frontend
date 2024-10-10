@@ -13,12 +13,12 @@ const PetDeleted = () => {
             {message ? (
                 <>
                     <div>{message}</div>
-                    <img src={"/src/assets/deleted_zap.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
+                    <img src={"/images/tools/deleted_zap.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
                 </>
             ) : (
                 <>
                     <p>No pet was deleted.</p>
-                    <img src={"/src/assets/deleted_not.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
+                    <img src={"/images/tools/deleted_not.png"} style={{ width: '500px', height: '500px' }} alt="Deleted" />
                 </>
             )}
 

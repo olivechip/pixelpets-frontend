@@ -19,7 +19,7 @@ const Adopt = () => {
     const handleAdopt = (petId) => {
         const { id, name, species, color, gender } = poundPets.find(pet => pet.id === petId)
         dispatch(adoptPet(id));
-        console.log(id, name, species, color, gender)
+        // console.log(id, name, species, color, gender)
         navigate('/pound/adopted', { 
             state: { 
                 message: `You have successfully adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}!`,

@@ -37,7 +37,7 @@ const Navbar = () => {
 
     return (
         <nav>
-            <Link to="/" className="logo-link"><img className="logo-img" src="/src/assets/logo/small_logo.png"></img></Link>
+            <Link to="/" className="logo-link"><img className="logo-img" src="/images/logo/small_logo.png"></img></Link>
             <ul className="navbar-left">
                 <li>
                     <Link to="/">Pixelpets</Link> 

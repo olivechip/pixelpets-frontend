@@ -17,11 +17,11 @@ const PetCreate = () => {
     const navigate = useNavigate();
 
     const colors = ['blue', 'red', 'green', 'yellow'];
-    const dynamicImagePath = `/src/assets/pixelpets/imgs/${selectedSpecies}/happy_${gender}_${selectedColor}_${selectedSpecies}.png`;
+    const dynamicImagePath = `/images/pixelpets/${selectedSpecies}/happy_${gender}_${selectedColor}_${selectedSpecies}.png`;
 
     useEffect(() => {
         const getColorlessFilenames = async () => {
-            const images = import.meta.glob(`./assets/pixelpets/imgs/*/colorless_*.png`);
+            const images = import.meta.glob(`/public/images/pixelpets/*/colorless_*.png`);
             const imagePaths = Object.keys(images);
             const imageUrls = await Promise.all(
                 imagePaths.map(async (path) => {

@@ -11,7 +11,7 @@ const Pound = () => {
                 <p>Welcome to the Pixel Pound! This is where kind-hearted souls can find the perfect Pixelpet for themselves.<br />
                     Or, you know, where less-dedicated pet owners can conveniently "rehome" their virtual companions when the novelty wears off.
                 </p>
-                <img src={"/src/assets/pixel_pound.png"} style={{ width: '500px', height: '500px' }} alt="pixel_pound" />
+                <img src={"/images/tools/pixel_pound.png"} style={{ width: '500px', height: '500px' }} alt="pixel_pound" />
             </div>
 
             <div>

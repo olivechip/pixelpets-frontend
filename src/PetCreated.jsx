@@ -15,7 +15,7 @@ const PetCreated = () => {
                     <div>{message}</div>
                     <img 
                         className="dynamic-image" 
-                        src={`/src/assets/pixelpets/imgs/${pet.species}/happy_${pet.gender}_${pet.color}_${pet.species}.png`} 
+                        src={`/images/pixelpets/${pet.species}/happy_${pet.gender}_${pet.color}_${pet.species}.png`} 
                         alt={`happy_${pet.gender}_${pet.color}_${pet.species}.png`}
                     />
                 </>

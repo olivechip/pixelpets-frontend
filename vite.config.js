@@ -1,18 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-
-// Get the backend URL from environment variables
-const backendUrl = process.env.VITE_BACKEND_URL || 'http://localhost:3000';
-
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
   plugins: [react()],
   server: {
     proxy: {
       '/api': { 
-        target: backendUrl, // Backend server URL
+        target: 'http://localhost:3000', // Local server URL
+        // target: 'https://pixelpets-backend.onrender.com', // Backend server URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '') 
       }

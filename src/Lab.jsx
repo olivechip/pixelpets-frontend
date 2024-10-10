@@ -11,7 +11,7 @@ const Lab = () => {
                 <p>Welcome to the Pixel Lab, the birthplace of all Pixelpets!<br />
                     Here, you can create your wildest digital pet dreams or, if necessary, delete your beloved creations.
                 </p>
-                <img src="/src/assets/pixel_lab.png" style={{ width: '500px', height: '500px' }} alt="pixel_lab" />
+                <img src="/images/tools/pixel_lab.png" style={{ width: '500px', height: '500px' }} alt="pixel_lab" />
             </div>
 
             <div>

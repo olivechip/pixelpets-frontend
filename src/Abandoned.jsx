@@ -16,7 +16,7 @@ const Abandoned = () => {
                     <div>{message}</div>
                     <img 
                             className="dynamic-image" 
-                            src={`/src/assets/pixelpets/imgs/${pet.species}/sad_${pet.gender}_${pet.color}_${pet.species}.png`} 
+                            src={`/images/pixelpets/${pet.species}/sad_${pet.gender}_${pet.color}_${pet.species}.png`} 
                             alt={`sad_${pet.gender}_${pet.color}_${pet.species}.png`}
                     />
                 </>
