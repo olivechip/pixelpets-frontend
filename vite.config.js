@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': { 
-        target: 'http://localhost:3000', // Local server URL
-        // target: 'https://pixelpets-backend.onrender.com', // Backend server URL
+        // target: 'http://localhost:3000', // Local server URL
+        target: 'https://pixelpets-backend.onrender.com', // Backend server URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '') 
       }
