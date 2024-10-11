@@ -5,6 +5,7 @@ import { register } from './redux/store';
 import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+console.log(BASE_URL);
 
 const Register = () => {
     const [formData, setFormData] = useState({

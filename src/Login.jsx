@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from './redux/store';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+console.log(BASE_URL);
 
 const Login = () => {
     const [ formData, setFormData ] = useState({ email: "" });
