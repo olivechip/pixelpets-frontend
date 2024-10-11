@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { register } from './redux/store';
 import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Register = () => {
     const [formData, setFormData] = useState({
         username: "",
@@ -44,7 +46,7 @@ const Register = () => {
         }
         
         try {
-            const response = await fetch('/api/auth/register', {
+            const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
