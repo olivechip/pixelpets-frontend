@@ -95,7 +95,7 @@ const Register = () => {
                         value={formData.username} 
                         onChange={handleChange}
                         placeholder="username"
-                        autocomplete="username"
+                        autoComplete="username"
                         required
                         minLength="3" 
                         maxLength="50"
@@ -108,7 +108,7 @@ const Register = () => {
                         value={formData.email} 
                         onChange={handleChange}
                         placeholder="email"
-                        autocomplete="email"
+                        autoComplete="email"
                         required
                         maxLength="255" 
                     />
@@ -118,7 +118,7 @@ const Register = () => {
                         name="password" 
                         type="password" 
                         placeholder="password" 
-                        autocomplete="new-password"
+                        autoComplete="new-password"
                         required 
                         minLength="8" 
                     />
@@ -128,7 +128,7 @@ const Register = () => {
                         name="confirmPassword" 
                         type="password" 
                         placeholder="confirm password"
-                        autocomplete="new-password"
+                        autoComplete="new-password"
                         required 
                         minLength="8" 
                     />
