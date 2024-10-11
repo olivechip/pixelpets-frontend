@@ -89,8 +89,9 @@ const PetCreate = () => {
 
         try {
             const token = localStorage.getItem('token');
-    
-            const response = await fetch('/api/pets', {
+            
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+            const response = await fetch(`${BASE_URL}/pets`, {
                 method: 'POST',
                 headers: {
                     'Content-Type':' application/json',

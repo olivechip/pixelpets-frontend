@@ -13,8 +13,9 @@ const Admin = () => {
             setLoading(true);
             setError(null);
 
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL;
             try {
-                const dataResponse = await fetch(`/api/admin`, { 
+                const dataResponse = await fetch(`${BASE_URL}/admin`, { 
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

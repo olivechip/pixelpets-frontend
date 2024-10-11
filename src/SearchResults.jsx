@@ -16,8 +16,9 @@ const SearchResults = () => {
 
             try {
                 const token = localStorage.getItem('token');
-                
-                const petResponse = await fetch(`/api/pets/search`, { 
+
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+                const petResponse = await fetch(`${BASE_URL}/pets/search`, { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ const SearchResults = () => {
                     body: JSON.stringify({ keyword: query }),
                 });
                 
-                const userResponse = await fetch(`/api/users/search`, { 
+                const userResponse = await fetch(`${BASE_URL}/users/search`, { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

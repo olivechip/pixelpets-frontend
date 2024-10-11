@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from './redux/store';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-console.log(BASE_URL);
-
 const Login = () => {
     const [ formData, setFormData ] = useState({ email: "" });
     const [ error, setError ] = useState(null);
@@ -26,6 +23,7 @@ const Login = () => {
 
         const password = e.target.password.value;
 
+        const BASE_URL = import.meta.env.VITE_BACKEND_URL;
         try {
             const response = await fetch(`${BASE_URL}/auth/login`, {
                 method: 'POST',

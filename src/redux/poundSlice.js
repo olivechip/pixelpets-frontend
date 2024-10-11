@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const fetchPoundPets = createAsyncThunk('/pound/fetchPoundPets', async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pound`, {
+    const response = await fetch(`${BASE_URL}/pound`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
   
@@ -16,7 +17,7 @@ const fetchPoundPets = createAsyncThunk('/pound/fetchPoundPets', async () => {
 
 const abandonPet = createAsyncThunk('/pound/abandon', async (petId) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pound/abandon/${petId}`, {
+    const response = await fetch(`${BASE_URL}/pound/abandon/${petId}`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -32,7 +33,7 @@ const abandonPet = createAsyncThunk('/pound/abandon', async (petId) => {
 
 const adoptPet = createAsyncThunk('/pound/adopt', async (petId) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pound/adopt/${petId}`, {
+    const response = await fetch(`${BASE_URL}/pound/adopt/${petId}`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`

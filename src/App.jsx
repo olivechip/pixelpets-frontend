@@ -58,8 +58,9 @@ function App() {
         handleLogout();
         return;
       }
-  
-      const response = await fetch('/api/auth/refresh', {
+      
+      const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+      const response = await fetch(`${BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

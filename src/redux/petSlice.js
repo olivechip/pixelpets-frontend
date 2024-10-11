@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pets/${petId}`, {
+    const response = await fetch(`${BASE_URL}/pets/${petId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -16,7 +17,7 @@ const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
 
 const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/users/${userId}/pets`, {
+    const response = await fetch(`${BASE_URL}/users/${userId}/pets`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
   
@@ -30,7 +31,7 @@ const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
 
 const deletePet = createAsyncThunk('pets/deletePet', async (petId, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pets/${petId}`, {
+    const response = await fetch(`${BASE_URL}/pets/${petId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -47,7 +48,7 @@ const deletePet = createAsyncThunk('pets/deletePet', async (petId, { dispatch, r
 
 const playWithPet = createAsyncThunk('pets/playWithPet', async ({ petId, userId }, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pets/${petId}/play`, {
+    const response = await fetch(`${BASE_URL}/pets/${petId}/play`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}` 
@@ -70,7 +71,7 @@ const playWithPet = createAsyncThunk('pets/playWithPet', async ({ petId, userId 
 
 const feedPet = createAsyncThunk('pets/feedPet', async ({ petId, userId }, { dispatch, rejectWithValue }) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pets/${petId}/feed`, {
+    const response = await fetch(`${BASE_URL}/pets/${petId}/feed`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}` 
@@ -94,7 +95,7 @@ const feedPet = createAsyncThunk('pets/feedPet', async ({ petId, userId }, { dis
 
 const petAnotherPet = createAsyncThunk('pets/petAnotherPet', async (petId, { rejectWithValue }) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`/api/pets/${petId}/pet`, {
+    const response = await fetch(`${BASE_URL}/pets/${petId}/pet`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`

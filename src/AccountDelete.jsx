@@ -47,9 +47,10 @@ const AccountDelete = () => {
 
         const password = e.target.password.value;
 
+        const BASE_URL = import.meta.env.VITE_BACKEND_URL;
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`/api/users/${user.id}`, {
+            const response = await fetch(`${BASE_URL}/users/${user.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
