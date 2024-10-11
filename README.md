@@ -4,9 +4,6 @@ This repository contains the frontend code for Pixelpets, a web application insp
 
 **Disclaimer:**  I do not own or claim any rights to the Neopets images used in this project. As of October 2024, all Neopets images are the property of World of Neopia, Inc.
 
-(image.png)
-(image-1.png)
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -42,6 +39,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Tech Stack
 
 * React
+* Redux
 * Plain CSS
 
 ## Contributing
