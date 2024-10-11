@@ -67,6 +67,10 @@ const Navbar = () => {
             </ul>
             ) : (
             <ul className="navbar-right">
+                {user.admin ? (
+                    <li><Link to={`/admin`}>Admin</Link></li>
+                ) : null 
+                }
                 <li>
                     <form onSubmit={handleSubmit}>
                         <div className="search-box">

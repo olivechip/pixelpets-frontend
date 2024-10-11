@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, persistor } from './redux/store';
 
@@ -27,6 +27,7 @@ import Navbar from './Navbar';
 import SearchResults from './SearchResults';
 import Forbidden from './Forbidden';
 import NotFound from './NotFound';
+import Github from './Github';
 
 function App() {
   const { isLoggedIn } = useSelector(state => state.user);
@@ -140,6 +141,8 @@ function App() {
         <Route path="/403" element={<Forbidden />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      
+      <Github />
     </>
   );
 }
