@@ -102,6 +102,7 @@ const AccountEdit = () => {
                         value={formData.username}
                         onChange={handleChange}
                         placeholder="username"
+                        autocomplete="username"
                         required
                         minLength="3"
                         maxLength="50"
@@ -114,6 +115,7 @@ const AccountEdit = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="email"
+                        autocomplete="email"
                         required
                         maxLength="255"
                     />
@@ -123,6 +125,7 @@ const AccountEdit = () => {
                         name="newPassword"
                         type="password"
                         placeholder="new password"
+                        autocomplete="new-password"
                         minLength="8" 
                     />
                     <br />
@@ -131,6 +134,7 @@ const AccountEdit = () => {
                         name="confirmPassword"
                         type="password"
                         placeholder="confirm new password"
+                        autocomplete="new-password"
                         minLength="8" 
                     />
                     <br />
@@ -139,6 +143,7 @@ const AccountEdit = () => {
                         name="currentPassword"
                         type="password"
                         placeholder="current password"
+                        autocomplete="current-password"
                         required
                     />
                     <br />
