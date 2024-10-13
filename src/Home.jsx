@@ -38,8 +38,6 @@ const Home = () => {
                         <br />
                         <Link to="/register">Register</Link>
                     </div>
-                    <br /><br /><br />
-                    <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
                 </div>
             }
         </div>

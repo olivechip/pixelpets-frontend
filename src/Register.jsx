@@ -136,6 +136,9 @@ const Register = () => {
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            
+            <br /><br /><br />
+            <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
         </div>
     );
 };

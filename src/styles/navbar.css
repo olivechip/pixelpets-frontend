@@ -66,39 +66,29 @@ nav a {
 @media (min-width: 768px) {
     nav {
         padding: 1rem 2rem;
-        /* Increased padding for desktop */
     }
 
     .navbar-left,
     .navbar-middle,
     .navbar-right {
         gap: 20px;
-        /* Add gap between items */
     }
 
     nav a {
         padding: 14px 20px;
-        /* Adjust padding for desktop */
         font-size: 20px;
-        /* Increase font size for better visibility */
     }
 
     .search-box {
         width: 300px;
-        /* Set a fixed width for the search box */
     }
 
     .search-box input {
         padding: 0.5rem;
-        /* Adjust padding for consistency */
     }
 
     .search-box button {
         padding: 0.5rem 1rem;
-        /* Adjusted padding for button */
         background-color: #FFD700;
-        /* Match button to navbar color */
     }
-
-    /* Optional: Style adjustments for any additional desktop features can be added here */
 }
