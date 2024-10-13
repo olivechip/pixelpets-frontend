@@ -29,6 +29,10 @@ import Forbidden from './Forbidden';
 import NotFound from './NotFound';
 import Github from './Github';
 
+import './styles/main.css';
+import './styles/index.css';
+import './styles/navbar.css';
+
 function App() {
   const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();

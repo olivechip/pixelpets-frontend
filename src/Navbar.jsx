@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, persistor } from './redux/store';
 
 const Navbar = () => {
-    const {  isLoggedIn, user } = useSelector(state => state.user);
-    const [ search, setSearch ] = useState("");
+    const { isLoggedIn, user } = useSelector(state => state.user);
+    const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-    
+
         // clear tokens and persist storage
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
@@ -37,46 +37,24 @@ const Navbar = () => {
 
     return (
         <nav>
-            <Link to="/" className="logo-link"><img className="logo-img" src="/images/logo/small_logo.png"></img></Link>
-            <ul className="navbar-left">
-                <li>
-                    <Link to="/">Pixelpets</Link> 
-                </li>
+            <div className="navbar-left">
+                <div><Link to="/">Pixelpets</Link></div>
                 {user && isLoggedIn && (
                     <>
-                        <li>
-                            <Link to="/dashboard">Dashboard</Link> 
-                        </li>
-                        <li>
-                            <Link to="/lab">Pixel Lab</Link> 
-                        </li>
-                        <li>
-                            <Link to="/pound">Pixel Pound</Link> 
-                        </li>
+                        <div><Link to="/dashboard">Dashboard</Link></div>
+                        <div><Link to="/lab">Pixel Lab</Link></div>
+                        <div><Link to="/pound">Pixel Pound</Link></div>
                     </>
                 )}
-            </ul>
-            {!user || !isLoggedIn ? (
-            <ul className="navbar-right">
-                <li>
-                    <Link to="/login">Login</Link>
-                </li>
-                <li>
-                    <Link to="/register">Register</Link>
-                </li>
-            </ul>
-            ) : (
-            <ul className="navbar-right">
-                {user.admin ? (
-                    <li><Link to={`/admin`}>Admin</Link></li>
-                ) : null 
-                }
-                <li>
+            </div>
+
+            {user && isLoggedIn && (
+                <div className="navbar-middle">
                     <form onSubmit={handleSubmit}>
                         <div className="search-box">
                             <input
                                 className="search"
-                                type="text" 
+                                type="text"
                                 name="search"
                                 value={search}
                                 onChange={handleChange}
@@ -87,15 +65,25 @@ const Navbar = () => {
                             </button>
                         </div>
                     </form>
-                </li>
-                <li>
-                    <Link to={`/account`}>{user.username}</Link> 
-                </li>
-                <li>
-                    <Link onClick={handleLogout}>Logout</Link> 
-                </li>
-            </ul>
+                </div>
             )}
+
+            <div className="navbar-right">
+                {user && isLoggedIn ? (
+                    <>
+                        {user.admin && (
+                            <div><Link to="/admin">Admin</Link></div>
+                        )}
+                        <div><Link to={`/account`}>{user.username}</Link></div>
+                        <div><Link onClick={handleLogout}>Logout</Link></div>
+                    </>
+                ) : (
+                    <>
+                        <div><Link to="/login">Login</Link></div>
+                        <div><Link to="/register">Register</Link></div>
+                    </>
+                )}
+            </div>
         </nav>
     );
 };

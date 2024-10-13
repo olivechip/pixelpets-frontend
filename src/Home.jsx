@@ -12,35 +12,38 @@ const Home = () => {
 
     return (
         <div>
-            { isLoggedIn && user ? (
+            {isLoggedIn && user ? (
                 <>
-                    <div className="welcome-message">
+                    <div className="welcome-message header">
                         <h1>{message || `Welcome back, ${user.username}!`}</h1>
                     </div>
 
                     <Tutorial />
-                    
-                    <div> 
+
+                    <div>
                         <Link to="/dashboard">Go to Dashboard</Link>
                     </div>
                 </>
-            ) : 
-            <div> 
-                <p className="account-message">{message}</p>
-
-                <div className="header">
-                    <h1>Welcome to Pixel Pets!</h1>
-                </div>
-                
-                <p>Create your account and start adopting adorable virtual pets!</p>
+            ) :
                 <div>
-                    <Link to="/login">Login</Link>
-                    <br />
-                    <Link to="/register">Register</Link>
+                    <p className="account-message">{message}</p>
+
+                    <div className="header">
+                        <h1>Welcome to Pixel Pets!</h1>
+                    </div>
+
+                    <p>Create your account and start adopting adorable virtual pets!</p>
+                    <div>
+                        <Link to="/login">Login</Link>
+                        <br />
+                        <Link to="/register">Register</Link>
+                    </div>
+                    <br /><br /><br />
+                    <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
                 </div>
-            </div> }                
+            }
         </div>
-      );
+    );
 };
 
 export default Home;

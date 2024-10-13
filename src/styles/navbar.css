@@ -1,0 +1,104 @@
+/* Base Styles for Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFD700;
+    font-size: 18px;
+    /* Corrected from '18x' to '18px' */
+    padding: 1rem 1rem;
+    /* Padding for base view */
+}
+
+/* Logo Link */
+.logo-link {
+    padding: 0.5rem 0.5rem 0.1rem;
+}
+
+/* Logo Image */
+.logo-img {
+    max-width: 70px;
+    max-height: 70px;
+}
+
+/* Navbar Links */
+nav a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Flex Containers */
+.navbar-left,
+.navbar-middle,
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    position: relative;
+}
+
+/* Search Input */
+.search-box input {
+    border: none;
+    padding: 0.38rem;
+    border-radius: 15px;
+    padding-left: 2rem;
+}
+
+/* Search Button */
+.search-box button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem;
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+/* Media Query for Desktop View */
+@media (min-width: 768px) {
+    nav {
+        padding: 1rem 2rem;
+        /* Increased padding for desktop */
+    }
+
+    .navbar-left,
+    .navbar-middle,
+    .navbar-right {
+        gap: 20px;
+        /* Add gap between items */
+    }
+
+    nav a {
+        padding: 14px 20px;
+        /* Adjust padding for desktop */
+        font-size: 20px;
+        /* Increase font size for better visibility */
+    }
+
+    .search-box {
+        width: 300px;
+        /* Set a fixed width for the search box */
+    }
+
+    .search-box input {
+        padding: 0.5rem;
+        /* Adjust padding for consistency */
+    }
+
+    .search-box button {
+        padding: 0.5rem 1rem;
+        /* Adjusted padding for button */
+        background-color: #FFD700;
+        /* Match button to navbar color */
+    }
+
+    /* Optional: Style adjustments for any additional desktop features can be added here */
+}
