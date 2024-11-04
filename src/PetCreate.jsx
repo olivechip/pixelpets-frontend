@@ -199,7 +199,7 @@ const PetCreate = () => {
                                         placeholder="name"
                                         required
                                         minLength="3"
-                                        maxLength="50"
+                                        maxLength="16"
                                     />
                                     {petNameError && (
                                         <div className="error">{petNameError}</div> 

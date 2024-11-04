@@ -43,8 +43,8 @@ const validatePetName = (petName) => {
   
     if (!trimmedPetName || petName === "") {
         return "Pet name cannot be empty.";
-    } else if (trimmedPetName.length > 50) {
-        return "Pet name cannot exceed 50 characters.";
+    } else if (trimmedPetName.length > 16) {
+        return "Pet name cannot exceed 16 characters.";
     } else if (trimmedPetName.length < 3) {
         return "Pet name must be at least 3 characters long.";
     } else if (!allowedChars.test(trimmedPetName)) {

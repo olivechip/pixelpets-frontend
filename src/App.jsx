@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, persistor } from './redux/store';
@@ -27,16 +27,16 @@ import Navbar from './Navbar';
 import SearchResults from './SearchResults';
 import Forbidden from './Forbidden';
 import NotFound from './NotFound';
-import Github from './Github';
 
 import './styles/main.css';
 import './styles/index.css';
-import './styles/navbar.css';
 
 function App() {
   const { isLoggedIn } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -50,20 +50,20 @@ function App() {
 
     // delayed redirect to home
     setTimeout(() => {
-        navigate('/');
+      navigate('/');
     }, 100);
   };
 
-  const refreshAccessToken = async () => { 
+  const refreshAccessToken = async () => {
     try {
-      const refreshToken = localStorage.getItem('refreshToken'); 
-  
+      const refreshToken = localStorage.getItem('refreshToken');
+
       if (!refreshToken) {
         console.warn('No refresh token found');
         handleLogout();
         return;
       }
-      
+
       const BASE_URL = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch(`${BASE_URL}/auth/refresh`, {
         method: 'POST',
@@ -72,17 +72,17 @@ function App() {
         },
         body: JSON.stringify({ refreshToken }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to refresh access token');
       }
-  
+
       const data = await response.json();
 
-      localStorage.setItem('token', data.token); 
+      localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expirationTime);
-      localStorage.setItem('refreshToken', data.refreshToken); 
+      localStorage.setItem('refreshToken', data.refreshToken);
       localStorage.setItem('refreshTokenExpirationTime', data.refreshTokenExpirationTime);
     } catch (error) {
       console.error('Error refreshing token:', error);
@@ -93,10 +93,10 @@ function App() {
   useEffect(() => {
     const checkTokenExpiration = () => {
       const expirationTime = localStorage.getItem('expirationTime');
-      
-      if (expirationTime && new Date().getTime() > expirationTime * 1000) { 
+
+      if (expirationTime && new Date().getTime() > expirationTime * 1000) {
         const refreshTokenExpirationTime = localStorage.getItem('refreshTokenExpirationTime');
-        
+
         if (refreshTokenExpirationTime && new Date().getTime() > refreshTokenExpirationTime * 1000) {
           handleLogout(); // Refresh token expired, log out the user
         } else {
@@ -104,7 +104,7 @@ function App() {
         }
       }
     };
-    
+
     // checks every 60 minutes, adjust if needed
     const minutes = 60;
     const intervalId = setInterval(checkTokenExpiration, minutes * 60 * 1000);
@@ -113,40 +113,41 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar onMenuToggle={() => setIsMenuOpen(!isMenuOpen)} />
 
-      <Routes>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        {isLoggedIn && (
-          <>
-            <Route path="/account" element={<AccountDetails />} />
-            <Route path="/account/edit" element={<AccountEdit />} />
-            <Route path="/account/delete" element={<AccountDelete />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users/:userId" element={<UserProfile />} />
-            <Route path="/pets/:petId" element={<PetDetail />} />
-            <Route path="/lab" element={<Lab />} />
-            <Route path="/lab/create" element={<PetCreate />} />
-            <Route path="/lab/created" element={<PetCreated />} />
-            <Route path="/lab/delete" element={<PetDelete />} />
-            <Route path="/lab/deleted" element={<PetDeleted />} />
-            <Route path="/pound" element={<Pound />} />
-            <Route path="/pound/adopt" element={<Adopt />} />
-            <Route path="/pound/adopted" element={<Adopted />} />
-            <Route path="/pound/abandon" element={<Abandon />} />
-            <Route path="/pound/abandoned" element={<Abandoned />} />
-            <Route path="/search/:query" element={<SearchResults />} />
-          </>
-        )}
-        {/* ... other routes */}
-        <Route path="/403" element={<Forbidden />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      
-      <Github />
+      {isMenuOpen && <div className="overlay" onClick={() => setIsMenuOpen(false)}></div>}
+
+      <div className={isMenuOpen ? 'content darkened' : 'content'}>
+        <Routes>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          {isLoggedIn && (
+            <>
+              <Route path="/account" element={<AccountDetails />} />
+              <Route path="/account/edit" element={<AccountEdit />} />
+              <Route path="/account/delete" element={<AccountDelete />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/users/:userId" element={<UserProfile />} />
+              <Route path="/pets/:petId" element={<PetDetail />} />
+              <Route path="/lab" element={<Lab />} />
+              <Route path="/lab/create" element={<PetCreate />} />
+              <Route path="/lab/created" element={<PetCreated />} />
+              <Route path="/lab/delete" element={<PetDelete />} />
+              <Route path="/lab/deleted" element={<PetDeleted />} />
+              <Route path="/pound" element={<Pound />} />
+              <Route path="/pound/adopt" element={<Adopt />} />
+              <Route path="/pound/adopted" element={<Adopted />} />
+              <Route path="/pound/abandon" element={<Abandon />} />
+              <Route path="/pound/abandoned" element={<Abandoned />} />
+              <Route path="/search/:query" element={<SearchResults />} />
+            </>
+          )}
+          <Route path="/403" element={<Forbidden />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </>
   );
 }

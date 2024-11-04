@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserPets, playWithPet, feedPet } from './redux/store';
-import { capitalizeFirstLetter } from './helpers/helpers';
+
+import PetCard from './PetCard';
+
+import './styles/dashboard.css';
 
 const Dashboard = () => {
     const location = useLocation();
@@ -11,61 +14,70 @@ const Dashboard = () => {
     const { pets, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
 
+    const [currentPetIndex, setCurrentPetIndex] = useState(0);
+
     useEffect(() => {
         if (user) {
             dispatch(fetchUserPets(user.id));
         }
     }, [user, dispatch]);
-    
+
+    const handleNext = () => {
+        setCurrentPetIndex((prevIndex) => (prevIndex + 1) % pets.length);
+    };
+
+    const handlePrev = () => {
+        setCurrentPetIndex((prevIndex) =>
+            (prevIndex - 1 + pets.length) % pets.length
+        );
+    };
+
     return (
-        <div>
-            <div className="header">
-                <h1>Dashboard</h1>
-            </div>
+        <div className="dashboard-container">
+            <div className="dashboard-white-background">
+                <div className="header">
+                    <h2>Dashboard</h2>
+                </div>
 
-            {loading && <p>Loading pets...</p>}
-            {error && <div className="error">{error}</div>}
+                {loading && <p>Loading pets...</p>}
+                {error && <div className="error">{error}</div>}
 
-            { message ? (
-                <div>{message}</div>
-            ) : null }
+                {pets.length > 0 ? (
+                    <div className="pet-slider">
+                        <button onClick={handlePrev} disabled={pets.length <= 1}>
+                            &lt;
+                        </button>
 
-            {!loading && pets.length > 0 ? (
-            <div className="pet-cards-container">
-                {pets.map((pet) => (
-                    <div key={pet.id} className="pet-card">
-                        <Link to={`/pets/${pet.id}`}>
-                            <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
-                        </Link>
-                        <div className="pet-details">
-                            <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3>
-                            <p>Species: {capitalizeFirstLetter(pet.species)}</p>
-                            <p>Color: {capitalizeFirstLetter(pet.color)}</p>
-                            <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
-                            <br />
-                            {/* <h4>Stats</h4> */}
-                            <p>Happiness: {pet.happiness}</p>
-                            <p>Fullness: {pet.hunger}</p>
-                            <p>Popularity: {pet.popularity}</p>
+                        <PetCard pet={pets[currentPetIndex]} />
 
-                            {/* Irrelevant at the moment */}
-                            {/* <p>Last Played: {pet.last_played? new Date(pet.last_played).toLocaleString(): "Never"}</p>
-                            <p>Last Fed: {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : "Never"}</p> */}
-
-                            <button onClick={() =>dispatch(playWithPet({ petId: pet.id, userId: user.id }))}>Play</button>{" "}
-                            <button onClick={() =>dispatch(feedPet({ petId: pet.id, userId: user.id }))}>Feed</button>{" "}
-                        </div>
+                        <button onClick={handleNext} disabled={pets.length <= 1}>
+                            &gt;
+                        </button>
                     </div>
-                ))}
+                ) : (
+                    <p>
+                        You have no pets. <br />
+                        Visit the <Link to="/lab">Lab</Link> to generate one, or the <Link to="/pound">Pound</Link> to adopt one!
+                    </p>
+                )}
+
+                {pets.length > 0 && (
+                    <div className="pet-actions">
+                        <button
+                            onClick={() => dispatch(playWithPet({ petId: pets[currentPetIndex].id, userId: user.id }))}
+                            className="action-button"
+                        >
+                            Play
+                        </button>
+                        <button
+                            onClick={() => dispatch(feedPet({ petId: pets[currentPetIndex].id, userId: user.id }))}
+                            className="action-button"
+                        >
+                            Feed
+                        </button>
+                    </div>
+                )}
             </div>
-            ) : (
-            <p>
-                You have no pets. <br />
-                
-                Visit the <Link to="/lab">Lab</Link> to generate one,
-                or the <Link to="/pound">Pound</Link> to adopt one!
-            </p>
-            )}
         </div>
     );
 };

@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { register } from './redux/store';
 import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
+
+
+import './styles/userForm.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -42,7 +45,7 @@ const Register = () => {
             setError(passwordError);
             return;
         }
-        
+
         try {
             const BASE_URL = import.meta.env.VITE_BACKEND_URL;
             const response = await fetch(`${BASE_URL}/auth/register`, {
@@ -64,10 +67,10 @@ const Register = () => {
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
-                localStorage.setItem('expirationTime', expirationTime); 
+                localStorage.setItem('expirationTime', expirationTime);
                 localStorage.setItem('refreshTokenExpirationTime', refreshTokenExpirationTime);
                 dispatch(register(user));
-                navigate('/', { state: { message: `Welcome to Pixelpets, ${user.username}!` }} );
+                navigate('/', { state: { message: `Welcome to Pixelpets, ${user.username}!` } });
             } else {
                 const errorData = await response.json();
                 console.error('Registration failed:', errorData.error);
@@ -80,65 +83,65 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <div className="header">
-                <h1>Register</h1>
-            </div>
-            
-            <div>
+        <div className="login-container">
+            <div className="login-white-background">
+                <div className="header">
+                    <h2>Register</h2>
+                </div>
+
                 {error && <div className="error">{error}</div>}
                 <form className="user-form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
+                    <label className="label" htmlFor="username">Username</label>
                     <input
+                        className="input"
                         name="username"
                         type="text"
-                        value={formData.username} 
+                        value={formData.username}
                         onChange={handleChange}
-                        placeholder="username"
                         autoComplete="username"
                         required
-                        minLength="3" 
+                        minLength="3"
                         maxLength="50"
                     />
-                    <br />
-                    <label htmlFor="email">Email Address:</label>
+                    <label className="label" htmlFor="email">Email Address</label>
                     <input
+                        className="input"
                         name="email"
-                        type="email" 
-                        value={formData.email} 
+                        type="email"
+                        value={formData.email}
                         onChange={handleChange}
-                        placeholder="email"
                         autoComplete="email"
                         required
-                        maxLength="255" 
+                        maxLength="255"
                     />
-                    <br />
-                    <label htmlFor="password">Password:</label>
-                    <input 
-                        name="password" 
-                        type="password" 
-                        placeholder="password" 
+                    <label className="label" htmlFor="password">Password</label>
+                    <input
+                        className="input"
+                        name="password"
+                        type="password"
                         autoComplete="new-password"
-                        required 
-                        minLength="8" 
+                        required
+                        minLength="8"
                     />
-                    <br />
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input 
-                        name="confirmPassword" 
-                        type="password" 
-                        placeholder="confirm password"
+                    <label className="label" htmlFor="confirmPassword">Confirm Password</label>
+                    <input
+                        className="input"
+                        name="confirmPassword"
+                        type="password"
                         autoComplete="new-password"
-                        required 
-                        minLength="8" 
+                        required
+                        minLength="8"
                     />
-                    <br />
-                    <button type="submit">Submit</button>
+                    <button type="submit" className="login-button">Register</button>
                 </form>
+
+                <br />
+                <div><Link to="/login">Already have an account? <br />Login here!</Link></div>
             </div>
-            
-            <br /><br /><br />
-            <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
+
+            <div className="message-container">
+                <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
+            </div>
         </div>
     );
 };

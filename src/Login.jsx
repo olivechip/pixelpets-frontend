@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from './redux/store';
 
+import './styles/userForm.css';
+
 const Login = () => {
-    const [ formData, setFormData ] = useState({ email: "" });
-    const [ error, setError ] = useState(null);
+    const [formData, setFormData] = useState({ email: "" });
+    const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,13 +39,13 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const { token, refreshToken, user, expirationTime, refreshTokenExpirationTime } = await response.json(); 
+                const { token, refreshToken, user, expirationTime, refreshTokenExpirationTime } = await response.json();
                 console.log('User logged in successfully:', user);
 
                 // Stores JWT, updates Redux user store, navigate to Dashboard
                 localStorage.setItem('token', token);
                 localStorage.setItem('refreshToken', refreshToken);
-                localStorage.setItem('expirationTime', expirationTime); 
+                localStorage.setItem('expirationTime', expirationTime);
                 localStorage.setItem('refreshTokenExpirationTime', refreshTokenExpirationTime);
                 dispatch(login(user));
                 navigate('/');
@@ -59,39 +61,43 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <div className="header">
-                <h1>Login</h1>
+        <div className="login-container">
+            <div className="login-white-background">
+                <div className="header">
+                    <h2>Login</h2>
+                </div>
+
+                {error && <div className="error">{error}</div>}
+                <form className="user-form" onSubmit={handleSubmit}>
+                    <label className="label" htmlFor="email">Email</label>
+                    <input
+                        className="input"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        autoComplete="email"
+                        required
+                    />
+                    <label className="label" htmlFor="password">Password</label>
+                    <input
+                        className="input"
+                        name="password"
+                        type="password"
+                        autoComplete="current-password"
+                        required
+                    />
+                    <button type="submit" className="login-button">Login</button>
+                </form>
+
+                <br />
+                <div><Link to="/register">Don't have an account? <br />Register here!</Link></div>
             </div>
-            
-            {error && <div className="error">{error}</div>}
-            <form className="user-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">Email Address:</label>
-                <input
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="email"
-                    autoComplete="email"
-                    required 
-                />
-                <br />
-                <label htmlFor="password">Password:</label>
-                <input 
-                    name="password" 
-                    type="password" 
-                    placeholder="password'"
-                    autoComplete="current-password"
-                    required 
-                />
-                <br />
-                <button type="submit">Submit</button>
-            </form>
-            
-            <br /><br /><br />
-            <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
-        </div>  
+
+            <div className="message-container">
+                <div>If using on Render, server needs time to boot up on Register or Login. Thanks for waiting!</div>
+            </div>
+        </div>
     );
 };
 

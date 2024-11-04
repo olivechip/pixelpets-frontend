@@ -1,0 +1,56 @@
+/* Github Wrapper */
+.github-wrapper {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+/* GitHub button */
+.github-check-button,
+.github-back-button {
+    font-family: "Tomorrow", sans-serif;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.github-check-button {
+    background-color: #21ed65;
+}
+
+.github-back-button {
+    background-color: #fff649;
+}
+
+/* GitHub Links Container */
+.github-link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 0.25rem;
+}
+
+.github-link-container button {
+    background-color: #367dff;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.github-button span {
+    display: inline-block;
+    font-size: 16px;
+}

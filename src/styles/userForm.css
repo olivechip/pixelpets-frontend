@@ -1,0 +1,83 @@
+/* Centered Container for Login/Register */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+.login-white-background {
+    background-color: #fff;
+    margin-top: 5%;
+    padding: 1.5rem 1.5rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Header */
+.header h2 {
+    text-align: center;
+}
+
+/* Form Styles */
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.label {
+    text-align: left;
+}
+
+.input {
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus styles */
+.input:focus {
+    outline: none;
+    border-color: #999;
+}
+
+/* Action Button */
+.login-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-button:hover {
+    background-color: #333;
+}
+
+/* Render Message */
+.message-container {
+    font-style: italic;
+    background-color: #fff;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}

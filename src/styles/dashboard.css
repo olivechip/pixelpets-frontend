@@ -1,0 +1,63 @@
+/* Centered Container for Dashboard */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.dashboard-white-background {
+    background-color: #fff;
+    padding: 1rem 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Header */
+.header h2 {
+    text-align: center;
+}
+
+/* Dashboard */
+.pet-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.pet-slider button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 16px;
+}
+
+.pet-slider button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pet-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.action-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    flex: 1;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #333;
+}
