@@ -1,11 +1,14 @@
 /* Centered Container for Dashboard */
-.dashboard-container {
+.pet-detail-container {
     display: flex;
     justify-content: center;
     padding: 2rem;
 }
 
-.dashboard-white-background {
+.pet-detail-white-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     padding: 1rem 1rem 2rem;
     border-radius: 8px;
@@ -14,40 +17,21 @@
     max-width: 800px;
 }
 
-/* Header */
 .header h2 {
     text-align: center;
 }
 
-/* Dashboard */
-.pet-slider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pet-slider button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    margin: 0 16px;
-}
-
-.pet-slider button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
 .pet-actions {
-    display: flex;
-    justify-content: space-between;
+    /* can be used for +1 buttons */
+    /* display: flex;
+    justify-content: space-between; */
     margin-top: 2rem;
 }
 
 .action-button {
     background-color: black;
     color: white;
+    width: 300px;
     border: none;
     border-radius: 8px;
     padding: 12px 0;

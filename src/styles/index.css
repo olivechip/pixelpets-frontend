@@ -8,6 +8,24 @@
   font-style: italic;
 }
 
+.back-button {
+  position: fixed; /* Fix the button to the viewport */
+  bottom: 20px; /* Position it 20px from the bottom */
+  left: 20px; /* Position it 20px from the left */
+  background-color: black; /* Background color of the button */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 12px 16px; /* Padding for the button */
+  cursor: pointer; /* Change cursor on hover */
+  font-size: 1rem; /* Font size */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.back-button:hover {
+  background-color: #333; /* Darker background on hover */
+}
 
 /* .header {
   display: flex;
