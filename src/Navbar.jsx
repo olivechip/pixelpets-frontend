@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, persistor } from './redux/store';
+import { LuSearch } from "react-icons/lu";
 
 import Github from './Github';
 
@@ -9,11 +10,13 @@ import './styles/navbar.css';
 
 const Navbar = () => {
     const { isLoggedIn, user } = useSelector(state => state.user);
+    const [isExpanded, setIsExpanded] = useState(false);
     const [search, setSearch] = useState("");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const searchContainerRef = useRef(null);
 
     const handleChange = (e) => {
         setSearch(e.target.value);
@@ -25,7 +28,7 @@ const Navbar = () => {
     }
 
     const handleLogout = () => {
-        setIsMenuOpen(!isMenuOpen);
+        setIsMenuOpen(false);
         dispatch(logout());
 
         // clear tokens and persist storage
@@ -45,33 +48,45 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+                setIsExpanded(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
         <nav className="navbar">
             <div className="navbar-left">
                 <div><Link to="/">Pixelpets</Link></div>
             </div>
 
-            {user && isLoggedIn && (
-                <div className="navbar-middle">
+            <div className="navbar-right">
+
+                <div ref={searchContainerRef} className={`search-container ${isExpanded ? 'expanded' : ''}`}>
                     <form onSubmit={handleSubmit}>
-                        <div className="search-box">
+                        {isExpanded && (
                             <input
                                 className="search"
                                 type="text"
-                                name="search"
                                 value={search}
                                 onChange={handleChange}
-                                placeholder="Search Pixelpets"
+                                placeholder="Search..."
                             />
-                            <button type="submit">
-                                <i className="fas fa-search"></i>
-                            </button>
-                        </div>
+                        )}
+                        <button
+                            type="button"
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="search-icon-button"
+                            aria-label="Toggle search"
+                        >
+                            <LuSearch className="search-icon" />
+                        </button>
                     </form>
                 </div>
-            )}
-
-            <div className="navbar-right">
 
                 <button className="hamburger" onClick={toggleMenu}>
                     <span className="bar"></span>

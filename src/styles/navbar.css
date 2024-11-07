@@ -28,9 +28,74 @@
 }
 
 /* Navbar Left Links */
-.navbar-left div,
-.navbar-right ul {
+.navbar-left div {
     margin: 0.5rem 0.5rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-container.expanded {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.search {
+    text-align: right;
+    max-width: 8rem;
+    transition: width 0.3s ease;
+    opacity: 0;
+    padding: 0 8px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    color: #000;
+    background-color: #fff;
+    position: relative;
+    right: 0;
+    z-index: 1;
+}
+
+.search-container.expanded .search {
+    width: 15rem;
+    opacity: 1;
+    right: 0;
+    border-radius: 8px;
+}
+
+.search-icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.search-container.expanded .search-icon {
+    display: none;
+}
+
+.search-icon {
+    font-size: 2rem;
+    color: #fff;
+    background-color: #000;
+    padding: 4px;
+    border-radius: 50%;
 }
 
 /* Hamburger Button */
@@ -105,7 +170,6 @@
     font-size: 1.2rem;
 }
 
-/* Search Box - Mobile View */
 .navbar-middle .search-box {
     display: none;
 }
@@ -114,47 +178,4 @@
 .sliding-menu .github {
     margin-top: auto;
     /* Push GitHub component to the bottom */
-}
-
-/* Desktop View - Media Query */
-@media (min-width: 768px) {
-    .navbar-left {
-        display: flex;
-        gap: 1rem;
-    }
-
-    /* Center Search Box */
-    .navbar-middle .search-box {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .navbar-middle input[type="text"] {
-        width: 200px;
-    }
-
-    /* Keep Hamburger Icon Hidden on Desktop */
-    .hamburger {
-        display: none;
-        /* Hide hamburger on desktop */
-    }
-
-    /* Show Sliding Menu on Desktop */
-    .sliding-menu {
-        display: none;
-        /* Keep this hidden on desktop */
-    }
-
-    /* Navbar Right Links */
-    .navbar-right {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .navbar-right ul {
-        display: flex;
-        gap: 1rem;
-        list-style: none;
-    }
 }
