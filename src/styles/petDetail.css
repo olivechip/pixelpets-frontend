@@ -1,4 +1,4 @@
-/* Centered Container for Dashboard */
+/* Centered Container for Pet Detail */
 .pet-detail-container {
     display: flex;
     justify-content: center;
@@ -22,9 +22,6 @@
 }
 
 .pet-actions {
-    /* can be used for +1 buttons */
-    /* display: flex;
-    justify-content: space-between; */
     margin-top: 2rem;
 }
 

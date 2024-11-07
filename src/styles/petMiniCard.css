@@ -1,0 +1,29 @@
+.pet-mini-card {
+    margin-top: 0.5rem;
+    max-width: 250px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pet-mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pet-mini-image {
+    width: 100%;
+    height: auto;
+}
+
+.pet-mini-name {
+    color: black;
+    text-decoration: none;
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}

@@ -10,8 +10,8 @@
 
 .back-button {
   position: fixed; /* Fix the button to the viewport */
-  bottom: 20px; /* Position it 20px from the bottom */
-  left: 20px; /* Position it 20px from the left */
+  bottom: 15px; /* Position it 20px from the bottom */
+  left: 15px; /* Position it 20px from the left */
   background-color: black; /* Background color of the button */
   color: white; /* Text color */
   border: none; /* No border */

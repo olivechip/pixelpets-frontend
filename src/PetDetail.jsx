@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPetById, petAnotherPet } from './redux/store';
 
-import PetCard from './PetCard';
 import PetData from './PetData';
 
 import './styles/petDetail.css';
@@ -34,7 +33,7 @@ const PetDetail = () => {
 
                     {pet && (
                         <>
-                            <PetCard pet={pet} />
+                            <PetData pet={pet} isOwner={isOwner} />
 
                             {!isOwner && pet.owner_id && (
                                 <div className="pet-actions">
@@ -46,8 +45,6 @@ const PetDetail = () => {
                                     </button>
                                 </div>
                             )}
-
-                            <PetData pet={pet} isOwner={isOwner} />
                         </>
                     )}
                 </div>

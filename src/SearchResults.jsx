@@ -16,7 +16,7 @@ const SearchResults = () => {
 
             try {
                 const token = localStorage.getItem('token');
-
+                console.log(1234)
                 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
                 const petResponse = await fetch(`${BASE_URL}/pets/search`, { 
                     method: 'POST',
