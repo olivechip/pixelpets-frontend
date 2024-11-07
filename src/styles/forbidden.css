@@ -1,0 +1,33 @@
+.forbidden-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.forbidden-white-background {
+    background-color: #fff;
+    padding: 1rem 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.action-button {
+    background-color: black;
+    color: white;
+    width: 300px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    flex: 1;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #333;
+}

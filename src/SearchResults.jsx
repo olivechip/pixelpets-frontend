@@ -9,6 +9,8 @@ const SearchResults = () => {
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState(null);
     
+    console.log(query)
+    
     useEffect(() => {
         const fetchSearchResults = async() => {
             setLoading(true);
@@ -16,9 +18,8 @@ const SearchResults = () => {
 
             try {
                 const token = localStorage.getItem('token');
-                console.log(1234)
                 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const petResponse = await fetch(`${BASE_URL}/pets/search`, { 
+                const response = await fetch(`${BASE_URL}/search`, { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -27,24 +28,14 @@ const SearchResults = () => {
                     body: JSON.stringify({ keyword: query }),
                 });
                 
-                const userResponse = await fetch(`${BASE_URL}/users/search`, { 
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ keyword: query }),
-                });
-
-                if (!petResponse.ok || !userResponse.ok) {
+                if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
-                const petData = await petResponse.json();
-                const userData = await userResponse.json();
+                const data = await response.json();
 
-                setPetResults(petData);
-                setUserResults(userData);
+                setUserResults(data[0]);
+                setPetResults(data[1]);
             } catch (error) {
                 setError(error);
             } finally {

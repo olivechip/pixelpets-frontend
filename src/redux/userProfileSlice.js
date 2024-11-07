@@ -7,6 +7,11 @@ const fetchUserById = createAsyncThunk('userProfile/fetchUserById', async (userI
         headers: { 'Authorization': `Bearer ${token}` } 
     });
 
+    if (response.status === 403) {
+        window.location.replace('/403');
+        return;
+    }
+    
     if (!response.ok) {
         throw new Error('Error fetching user profile'); 
     }

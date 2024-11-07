@@ -24,8 +24,12 @@ const Navbar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate(`/search/${search}`);
-    }
+        if (search.trim() !== "") {
+            navigate(`/search/${search}`);
+            setSearch("");
+            setIsExpanded(false);
+        }
+    };
 
     const handleLogout = () => {
         setIsMenuOpen(false);

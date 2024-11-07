@@ -7,6 +7,11 @@ const fetchPetById = createAsyncThunk('pets/fetchPetById', async (petId) => {
         headers: { 'Authorization': `Bearer ${token}` }
     });
 
+    if (response.status === 403) {
+        window.location.replace('/403');
+        return;
+    }
+
     if (!response.ok) {
         throw new Error('Error fetching pet details');
     }
@@ -20,7 +25,12 @@ const fetchUserPets = createAsyncThunk('pets/fetchUserPets', async (userId) => {
     const response = await fetch(`${BASE_URL}/users/${userId}/pets`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
-  
+    
+    if (response.status === 403) {
+        window.location.replace('/403');
+        return;
+    }
+    
     if (!response.ok) {
         throw new Error('Error fetching pets');
     }

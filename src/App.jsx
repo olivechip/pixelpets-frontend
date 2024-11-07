@@ -123,6 +123,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/search/:query" element={<SearchResults />} />
+          
+          <Route path="/users/:userId" element={<UserProfile />} />
+          <Route path="/pets/:petId" element={<PetDetail />} />
           {isLoggedIn && (
             <>
               <Route path="/account" element={<AccountDetails />} />
@@ -141,7 +145,6 @@ function App() {
               <Route path="/pound/adopted" element={<Adopted />} />
               <Route path="/pound/abandon" element={<Abandon />} />
               <Route path="/pound/abandoned" element={<Abandoned />} />
-              <Route path="/search/:query" element={<SearchResults />} />
             </>
           )}
           <Route path="/403" element={<Forbidden />} />

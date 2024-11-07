@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "./helpers/helpers";
+import { useSelector } from "react-redux";
 
 const Admin = () => {
+    const { user } = useSelector(state => state.user);
     const [ userResults, setUserResults ] = useState([]);
     const [ petResults, setPetResults ] = useState([]);
     const [ loading, setLoading ] = useState(true);
@@ -21,6 +23,11 @@ const Admin = () => {
                         'Content-Type': 'application/json',
                     },
                 });
+                
+                if (!user || !user.admin) {
+                    window.location.replace('/403');
+                    return;
+                }
 
                 if (!dataResponse.ok) {
                     throw new Error('Network response was not ok');
