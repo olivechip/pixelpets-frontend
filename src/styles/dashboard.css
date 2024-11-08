@@ -52,9 +52,10 @@
     border-radius: 8px;
     padding: 12px 0;
     flex: 1;
-    margin: 0 8px;
     cursor: pointer;
+    text-align: center;
     transition: background-color 0.3s ease;
+    margin: 0 8px;
 }
 
 .action-button:hover {

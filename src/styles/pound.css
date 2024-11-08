@@ -1,0 +1,92 @@
+/* Centered Container for Pet Detail */
+.pound-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.pound-white-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.pound-image {
+    width: 300px;
+    height: 300px;
+    margin-top: -2rem;
+    overflow: hidden;
+}
+
+.pound-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+    gap: 16px;
+}
+
+.pound-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.pound-button:hover,
+.action-button:hover {
+    background-color: #333;
+}
+
+.are-you-sure-confirm {
+    color: blue;
+    margin-bottom: -1rem;
+    margin-top: 1rem;
+}
+
+.are-you-sure-delete {
+    color: red;
+    margin-bottom: -1rem;
+    margin-top: 1rem;
+}
+
+.delete-button {
+    background-color: rgb(224, 22, 22);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.delete-button:hover,
+.action-button:hover {
+    background-color: #f55858;
+}
+
+.back-to-dashboard {
+    margin-top: -2rem;
+}
+
+.dynamic-image {
+    margin-top: -1rem;
+}

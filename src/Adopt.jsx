@@ -1,76 +1,124 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPoundPets, adoptPet } from './redux/store'; 
+import { fetchUserPets, adoptPet } from './redux/store';
 import { capitalizeFirstLetter } from './helpers/helpers';
 
+import PetMiniCard from './PetMiniCard';
+
+import './styles/pound.css';
+
 const Adopt = () => {
+    const [currentPetIndex, setCurrentPetIndex] = useState(0);
+    const [confirmAdopt, setConfirmAdopt] = useState(false);
     const { user } = useSelector((state) => state.user);
-    const { poundPets, loading, error } = useSelector(state => state.pound);
+    const { pets, loading, error } = useSelector(state => state.pets);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
-            dispatch(fetchPoundPets()); 
+            dispatch(fetchUserPets(user.id));
         }
-    }, [dispatch]);
+    }, [user, dispatch]);
+
+    const handlePrevPet = () => {
+        setCurrentPetIndex((prevIndex) =>
+            prevIndex === 0 ? pets.length - 1 : prevIndex - 1
+        );
+    };
+
+    const handleNextPet = () => {
+        setCurrentPetIndex((prevIndex) =>
+            prevIndex === pets.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    const handleAdoptClick = (petId) => {
+        setConfirmAdopt(true);
+    };
+
+    const handleCancelAdopt = () => {
+        setConfirmAdopt(false);
+    };
 
     const handleAdopt = (petId) => {
-        const { id, name, species, color, gender } = poundPets.find(pet => pet.id === petId)
-        dispatch(adoptPet(id));
-        // console.log(id, name, species, color, gender)
-        navigate('/pound/adopted', { 
-            state: { 
-                message: `You have successfully adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}!`,
-                pet: {
-                    species: species,
-                    color: color,
-                    gender: gender
-                }
-            },
-            replace: true
-        });    
+        const pet = pets.find(pet => pet.id === petId);
+        if (pet) {
+            const { id, name, species, color, gender } = pet;
+            dispatch(adoptPet(id)); // Assuming you have an adoptPet action
+            navigate('/pound/adopted', {
+                state: {
+                    message: `You have adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}.`,
+                    pet: { species, color, gender }
+                },
+                replace: true
+            });
+        }
     };
 
     return (
-        <div>
-            <div className="header">
-                <div className="button-container-left">
-                    <button onClick={() => navigate(-1)}>Back</button>
+        <div className="pound-container">
+            <div className="pound-white-background">
+                <div className="header">
+                    <h2>Adopt a Pixelpet</h2>
+                    <p>If you want to give a Pixelpet a forever home, you can adopt them from the Pixel Pound.</p>
                 </div>
-                <h1>Adopt a Pet</h1>
-            </div>
 
-            <div>
-                <p>These Pixelpets are ready for a fresh start and a loving new home! <br /> 
-                    (No, they don't chew furniture or computer cords, we checked.)
-                </p>
-            </div>
-            
-            {loading && <p>Loading pets...</p>} 
-            {error && <div className="error">{error}</div>}
+                {loading && <p>Loading pets...</p>}
+                {error && <div className="error">{error}</div>}
 
-            {!loading && typeof(poundPets) === 'object' && poundPets.length > 0 ? (
-                <div className="pet-cards-container">
-                    {poundPets.map((pet) => (
-                        <div key={pet.id} className="pet-card">
-                            <Link to={`/pets/${pet.id}`}>
-                                <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
-                            </Link>
-                            <div className="pet-details">
-                                <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3> 
-                                <p>Species: {capitalizeFirstLetter(pet.species)}</p>
-                                <p>Color: {capitalizeFirstLetter(pet.color)}</p>
-                                <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
-                                <button className="confirm-button" onClick={() => handleAdopt(pet.id)}>Adopt Me!</button>
-                            </div>
-                        </div>
-                    ))}
+                {!loading && pets.length > 0 ? (
+                    <div className="pet-slider">
+                        <button onClick={handlePrevPet} disabled={pets.length <= 1 || confirmAdopt === true}>
+                            &lt;
+                        </button>
+
+                        <PetMiniCard pet={pets[currentPetIndex]} />
+
+                        <button onClick={handleNextPet} disabled={pets.length <= 1 || confirmAdopt === true}>
+                            &gt;
+                        </button>
+                    </div>
+                ) : (
+                    <p>You have no pets to adopt.</p>
+                )}
+
+                {confirmAdopt ? (
+                    <p className='are-you-sure-confirm'>Are you sure?</p>
+                ) : null}
+
+                <div className="pound-buttons">
+                    {confirmAdopt ? (
+                        <>
+                            <button
+                                className="pound-button"
+                                onClick={handleCancelAdopt}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="confirm-button"
+                                onClick={() => handleAdopt(pets[currentPetIndex]?.id)}
+                            >
+                                Adopt
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            className="pound-button"
+                            onClick={() => handleAdoptClick(pets[currentPetIndex]?.id)}
+                            disabled={!pets[currentPetIndex]}
+                        >
+                            Adopt
+                        </button>
+                    )}
                 </div>
-            ) : (
-                <p>There are no pets available for adoption at the moment. Check back later!</p>
-            )}
+
+                <div className="back-link">
+                    <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+                </div>
+            </div>
         </div>
     );
 };

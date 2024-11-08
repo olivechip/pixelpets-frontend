@@ -1,26 +1,29 @@
 import { Link } from 'react-router-dom';
 
+import './styles/pound.css';
+
 const Pound = () => {
     return (
-        <div>
-            <div className="header">
-                <h1>The Pixel Pound</h1>
-            </div>
-            
-            <div>
-                <p>Welcome to the Pixel Pound! This is where kind-hearted souls can find the perfect Pixelpet for themselves.<br />
-                    Or, you know, where less-dedicated pet owners can conveniently "rehome" their virtual companions when the novelty wears off.
-                </p>
-                <img src={"/images/tools/pixel_pound.png"} style={{ width: '500px', height: '500px' }} alt="pixel_pound" />
-            </div>
+        <div className="pound-container">
+            <div className="pound-white-background">
+                <div className="header">
+                    <h2>The Pixel Pound</h2>
+                    <p>Find a new Pixelpet to adopt or rehome a pet that needs a fresh start.</p>
+                </div>
 
-            <div>
-                <Link to="/pound/adopt">Adopt</Link>
-                <br />
-                <Link to="/pound/abandon">Abandon</Link>
+                <img
+                    src="/images/tools/pixel_pound.png"
+                    className="pound-image"
+                    alt="pixel_pound"
+                />
+
+                <div className="pound-buttons">
+                    <Link to="/pound/adopt" className="pound-button">Adopt</Link>
+                    <Link to="/pound/abandon" className="pound-button">Abandon</Link>
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Pound;

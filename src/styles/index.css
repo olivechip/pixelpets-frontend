@@ -21,6 +21,7 @@
   font-size: 1rem; /* Font size */
   transition: background-color 0.3s ease; /* Transition for hover effect */
   z-index: 1000; /* Ensure it stays on top */
+  text-decoration: none;
 }
 
 .back-button:hover {
@@ -287,26 +288,23 @@
 }
 
 .confirm-button {
-  font-family: "Tomorrow", sans-serif;
-  background-color: #769ff7a7;
+  background-color: rgb(78, 80, 232);
+  color: rgb(255, 255, 255);
   border: none;
-  color: black;
-  padding: 10px 20px;
-  margin: 0;
+  border-radius: 8px;
+  padding: 12px 0;
+  flex: 1;
+  cursor: pointer;
   text-align: center;
+  transition: background-color 0.3s ease;
+  margin: 0 8px;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
 }
 
-.confirm-button:hover {
-  transform: scale(1.1);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+.confirm-button:hover, .action-button:hover {
+  background-color: rgb(109, 111, 245);
 }
+
 
 .edit-button {
   font-family: "Tomorrow", sans-serif;
@@ -330,24 +328,21 @@
 }
 
 .delete-button {
-  font-family: "Tomorrow", sans-serif;
-  background-color: #ff4c4c;
+  background-color: rgb(224, 22, 22);
+  color: rgb(255, 255, 255);
   border: none;
-  color: black;
-  padding: 10px 20px;
+  border-radius: 8px;
+  padding: 12px 0;
+  flex: 1;
+  cursor: pointer;
   text-align: center;
+  transition: background-color 0.3s ease;
+  margin: 0 8px;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
 }
 
-.delete-button:hover {
-  transform: scale(1.1);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+.delete-button:hover, .action-button:hover {
+  background-color: rgb(230, 86, 86);
 }
 
 .cancel-button {
