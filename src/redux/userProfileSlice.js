@@ -11,7 +11,12 @@ const fetchUserById = createAsyncThunk('userProfile/fetchUserById', async (userI
         window.location.replace('/403');
         return;
     }
-    
+
+    if (response.status === 404) {
+        window.location.replace('/404');
+        return;
+    }
+
     if (!response.ok) {
         throw new Error('Error fetching user profile'); 
     }

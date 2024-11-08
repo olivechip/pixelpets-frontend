@@ -1,24 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import './styles/error.css';
 
 const NotFound = () => {
+    const { user } = useSelector(state => state.user);
+
     const navigate = useNavigate();
 
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-
     return (
-        <div className="not-found-page">
-            <div className="header">
-                <h1>Oops! Page Not Found</h1>
+        <div className="error-container">
+            <div className="error-white-background">
+                <div className="header">
+                    <h2>Oops! Page Not Found</h2>
+                </div>
+
+                <p>The page you're looking for doesn't seem to exist.</p>
+
+                <div className="action-links">
+                    <Link to="/" className="action-link">Go to Home Page</Link>
+                </div>
+
             </div>
-            
-            <p>The page you're looking for doesn't seem to exist.</p>
-            <div>
-                <Link to="" onClick={handleGoBack}>Go Back</Link>
-                    <br />
-                <Link to="/">Go to Home Page</Link>
-            </div>
+            <button className="back-button" onClick={() => navigate(-1)}>
+                Back
+            </button>
         </div>
     );
 };

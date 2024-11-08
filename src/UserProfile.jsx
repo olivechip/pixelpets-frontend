@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserById, fetchUserPets, petAnotherPet } from './redux/store';
-import { capitalizeFirstLetter } from './helpers/helpers';
+import { fetchUserById, fetchUserPets } from './redux/store';
+
+import UserCard from './UserCard';
+import PetMiniCard from './PetMiniCard';
+
+import './styles/userProfile.css';
 
 const UserProfile = () => {
     const { user } = useSelector(state => state.user);
@@ -12,77 +16,63 @@ const UserProfile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [currentPetIndex, setCurrentPetIndex] = useState(0);
+
+    // Effect to fetch user and pets when component mounts
     useEffect(() => {
-        dispatch(fetchUserById(userId))
+        dispatch(fetchUserById(userId));
         dispatch(fetchUserPets(userId));
     }, [userId, dispatch]);
 
+    // Handlers for slider navigation
+    const handlePrev = () => {
+        if (currentPetIndex > 0) {
+            setCurrentPetIndex(currentPetIndex - 1);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentPetIndex < pets.length - 1) {
+            setCurrentPetIndex(currentPetIndex + 1);
+        }
+    };
+
     return (
-        <div>
-            <div className="header">
-                <div className="button-container-left">
-                    <button onClick={() => navigate(-1)}>Back</button>
+        <div className="user-profile-container">
+            <div className="user-profile-white-background">
+                <div className="header">
+                    <h2>User Profile</h2>
                 </div>
-                <h1>User Profile</h1>
-            </div>
 
-            {loading && <p>Loading user profile...</p>}
-            {error && <div className="error">{error}</div>}
+                {loading && <p>Loading user profile...</p>}
+                {error && <div className="error">{error}</div>}
 
-            {profile && (
-                <>
-                    <p>
-                        <b>Username:</b> {profile.username}
-                    </p>
-                    <p>
-                        <b>Joined:</b> {new Date(profile.created_at).toLocaleDateString()}
-                    </p>
+                {profile && (
+                    <>
+                        <UserCard profile={profile} />
 
-                    {/* Pets Owned Info */}
-                    <h2>Owned Pets</h2>
-                    {pets.length > 0 ? (
-                        <div className="pet-cards-container">
-                            {pets.map((pet) => {
-                                const isOwner = user && user.id === pet.owner_id;
-                                return (
-                                    <div key={pet.id} className="pet-card">
-                                        <Link to={`/pets/${pet.id}`}>
-                                            <img
-                                                src={pet.img_url}
-                                                alt={`${pet.species}_${pet.color}_${pet.gender}.png`}
-                                                className="pet-image"
-                                            />
-                                        </Link>
-                                        <div className="pet-details">
-                                            <h3><Link to={`/pets/${pet.id}`}>{pet.name}</Link></h3>
-                                            <p>Species: {capitalizeFirstLetter(pet.species)}</p>
-                                            <p>Color: {capitalizeFirstLetter(pet.color)}</p>
-                                            <p>Gender: {capitalizeFirstLetter(pet.gender)}</p>
-                                            <br />
-                                            {/* <h4>Stats</h4> */}
-                                            <p>Happiness: {pet.happiness}</p>
-                                            <p>Hunger: {pet.hunger}</p>
-                                            <p>Popularity: {pet.popularity}</p>
+                        <h4>Owned Pets</h4>
+                        {pets.length > 0 ? (
+                            <div className="pet-slider">
+                                <button onClick={handlePrev} disabled={pets.length <= 1 || currentPetIndex === 0}>
+                                    &lt;
+                                </button>
 
-                                            {/* Irrelevant at the moment */}
-                                            {/* <p>Last Played: {pet.last_played? new Date(pet.last_played).toLocaleString(): "Never"}</p>
-                                            <p>Last Fed: {pet.last_fed ? new Date(pet.last_fed).toLocaleString() : "Never"}</p> */}
+                                <PetMiniCard pet={pets[currentPetIndex]} />
 
-                                            {pet.owner_id && !isOwner && (
-                                                <button onClick={() => dispatch(petAnotherPet(pet.id))}>
-                                                    Pet
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                <button onClick={handleNext} disabled={pets.length <= 1 || currentPetIndex === pets.length - 1}>
+                                    &gt;
+                                </button>
+                            </div>
                         ) : (
-                        <p>How sad... this user has no pets.</p>
-                    )}
-                </>
-            )}
+                            <p>How sad... this user has no pets.</p>
+                        )}
+                    </>
+                )}
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    Back
+                </button>
+            </div>
         </div>
     );
 };

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import './styles/forbidden.css';
+import './styles/error.css';
 
 const ForbiddenPage = () => {
   const { user } = useSelector(state => state.user);
 
   return (
-    <div className="forbidden-container">
-      <div className="forbidden-white-background">
+    <div className="error-container">
+      <div className="error-white-background">
         <div className="header">
           <h1>Access Forbidden</h1>
         </div>
@@ -24,9 +24,8 @@ const ForbiddenPage = () => {
             <Link to="/login" className="auth-button">Login</Link>
             <Link to="/register" className="auth-button">Register</Link>
           </div>
-        ) : (
-          <p>You are logged in as {user.username}</p>
-        )}
+        ) : null
+        }
       </div>
     </div>
   );

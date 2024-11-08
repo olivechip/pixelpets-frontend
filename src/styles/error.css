@@ -1,12 +1,12 @@
-.forbidden-container {
+.error-container {
     display: flex;
-    justify-content: center;
+    align-items: center;
     padding: 2rem;
     flex-direction: column;
     gap: 2rem;
 }
 
-.forbidden-white-background {
+.error-white-background {
     background-color: #fff;
     padding: 1rem 1rem 2rem;
     border-radius: 8px;

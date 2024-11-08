@@ -8,9 +8,7 @@ const PetData = ({ pet, isOwner }) => {
     return (
         <>
             <div className="pet-data">
-                <Link to={`/pets/${pet.id}`}>
-                    <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
-                </Link>
+                <img src={pet.img_url} alt={`${pet.species}_${pet.color}_${pet.gender}.png`} className="pet-image" />
                 <h3 className="pet-name">
                     {pet.name}
                 </h3>
