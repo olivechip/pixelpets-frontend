@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const Adopted = () => {
@@ -24,10 +23,7 @@ const Adopted = () => {
                 ) : (
                     <p>No pet was adopted.</p>
                 )}
-
-                <div className="pound-buttons">
-                    <Link to="/dashboard" className="pound-button back-to-dashboard">Back to Dashboard</Link>
-                </div>
+                <p><Link to="/dashboard">View in Dashboard</Link></p>
             </div>
 
             <div className="back-link">

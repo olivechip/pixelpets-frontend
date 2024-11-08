@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const Abandoned = () => {
@@ -24,11 +23,9 @@ const Abandoned = () => {
                 ) : (
                     <p>No pet was abandoned.</p>
                 )}
-
-                <div className="pound-buttons">
-                    <Link to="/dashboard" className="pound-button back-to-dashboard">Back to Dashboard</Link>
-                </div>
+                <p><Link to="/dashboard">Back to Dashboard</Link></p>
             </div>
+
             <div className="back-link">
                 <Link to="/pound" className="back-button">Back to the Pixel Pound</Link>
             </div>
