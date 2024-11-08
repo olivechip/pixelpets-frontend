@@ -56,8 +56,8 @@ const Dashboard = () => {
                     </div>
                 ) : (
                     <p>
-                        You have no pets. <br />
-                        Visit the <Link to="/lab">Lab</Link> to generate one, or the <Link to="/pound">Pound</Link> to adopt one!
+                        You have no pets.
+                        Visit the <Link to="/lab">Pixel Lab</Link> to create one, or the <Link to="/pound">Pixel Pound</Link> to adopt one!
                     </p>
                 )}
 

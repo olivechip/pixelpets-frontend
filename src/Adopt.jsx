@@ -81,7 +81,7 @@ const Adopt = () => {
                         </button>
                     </div>
                 ) : (
-                    <p>You have no pets to adopt.</p>
+                    <p>There are currently no pets to adopt.</p>
                 )}
 
                 {confirmAdopt ? (
