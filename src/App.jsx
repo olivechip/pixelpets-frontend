@@ -119,12 +119,12 @@ function App() {
 
       <div className={isMenuOpen ? 'content darkened' : 'content'}>
         <Routes>
-          <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search/:query" element={<SearchResults />} />
-          
+
           <Route path="/users/:userId" element={<UserProfile />} />
           <Route path="/pets/:petId" element={<PetDetail />} />
           {isLoggedIn && (
