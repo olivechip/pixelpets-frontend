@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserPets, adoptPet } from './redux/store';
+import { fetchPoundPets, adoptPet } from './redux/store';
 import { capitalizeFirstLetter } from './helpers/helpers';
 
 import PetMiniCard from './PetMiniCard';
@@ -12,25 +12,26 @@ const Adopt = () => {
     const [currentPetIndex, setCurrentPetIndex] = useState(0);
     const [confirmAdopt, setConfirmAdopt] = useState(false);
     const { user } = useSelector((state) => state.user);
-    const { pets, loading, error } = useSelector(state => state.pets);
+    const { poundPets, loading, error } = useSelector(state => state.pound);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    console.log(poundPets)
     useEffect(() => {
         if (user) {
-            dispatch(fetchUserPets(user.id));
+            dispatch(fetchPoundPets(user.id));
         }
     }, [user, dispatch]);
 
     const handlePrevPet = () => {
         setCurrentPetIndex((prevIndex) =>
-            prevIndex === 0 ? pets.length - 1 : prevIndex - 1
+            prevIndex === 0 ? poundPets.length - 1 : prevIndex - 1
         );
     };
 
     const handleNextPet = () => {
         setCurrentPetIndex((prevIndex) =>
-            prevIndex === pets.length - 1 ? 0 : prevIndex + 1
+            prevIndex === poundPets.length - 1 ? 0 : prevIndex + 1
         );
     };
 
@@ -43,10 +44,10 @@ const Adopt = () => {
     };
 
     const handleAdopt = (petId) => {
-        const pet = pets.find(pet => pet.id === petId);
+        const pet = poundPets.find(pet => pet.id === petId);
         if (pet) {
             const { id, name, species, color, gender } = pet;
-            dispatch(adoptPet(id)); // Assuming you have an adoptPet action
+            dispatch(adoptPet(id));
             navigate('/pound/adopted', {
                 state: {
                     message: `You have adopted ${name}, the ${capitalizeFirstLetter(color)} ${capitalizeFirstLetter(species)}.`,
@@ -68,15 +69,15 @@ const Adopt = () => {
                 {loading && <p>Loading pets...</p>}
                 {error && <div className="error">{error}</div>}
 
-                {!loading && pets.length > 0 ? (
+                {!loading && poundPets.length > 0 ? (
                     <div className="pet-slider">
-                        <button onClick={handlePrevPet} disabled={pets.length <= 1 || confirmAdopt === true}>
+                        <button onClick={handlePrevPet} disabled={poundPets.length <= 1 || confirmAdopt === true}>
                             &lt;
                         </button>
 
-                        <PetMiniCard pet={pets[currentPetIndex]} />
+                        <PetMiniCard pet={poundPets[currentPetIndex]} />
 
-                        <button onClick={handleNextPet} disabled={pets.length <= 1 || confirmAdopt === true}>
+                        <button onClick={handleNextPet} disabled={poundPets.length <= 1 || confirmAdopt === true}>
                             &gt;
                         </button>
                     </div>
@@ -99,7 +100,7 @@ const Adopt = () => {
                             </button>
                             <button
                                 className="confirm-button"
-                                onClick={() => handleAdopt(pets[currentPetIndex]?.id)}
+                                onClick={() => handleAdopt(poundPets[currentPetIndex]?.id)}
                             >
                                 Adopt
                             </button>
@@ -107,8 +108,8 @@ const Adopt = () => {
                     ) : (
                         <button
                             className="pound-button"
-                            onClick={() => handleAdoptClick(pets[currentPetIndex]?.id)}
-                            disabled={!pets[currentPetIndex]}
+                            onClick={() => handleAdoptClick(poundPets[currentPetIndex]?.id)}
+                            disabled={!poundPets[currentPetIndex]}
                         >
                             Adopt
                         </button>
