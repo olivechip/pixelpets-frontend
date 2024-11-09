@@ -15,6 +15,49 @@
     max-width: 800px;
 }
 
+.logged-in {
+    padding-bottom: 1rem;
+}
+
+.daily-tasks ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.daily-tasks li {
+    padding: 0.25rem;
+    /* Adds spacing between list items */
+}
+
+.incomplete {
+    color: rgb(127, 127, 127);
+}
+
+.complete {
+    color: green;
+}
+
+.circle-icon {
+    color: rgb(127, 127, 127);
+}
+
+.check-icon {
+    color: green;
+}
+
+.popular-pets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.popular-pets li {
+    padding: 0.25rem;
+    /* Adds spacing between list items */
+}
+
 /* Featured Pets Section */
 .featured {
     padding: 16px;

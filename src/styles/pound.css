@@ -47,40 +47,8 @@
     text-decoration: none;
 }
 
-.pound-button:hover,
-.action-button:hover {
+.pound-button:hover {
     background-color: #333;
-}
-
-.are-you-sure-confirm {
-    color: blue;
-    margin-bottom: -1rem;
-    margin-top: 1rem;
-}
-
-.are-you-sure-delete {
-    color: red;
-    margin-bottom: -1rem;
-    margin-top: 1rem;
-}
-
-.delete-button {
-    background-color: rgb(224, 22, 22);
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 0;
-    flex: 1;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin: 0 8px;
-    text-decoration: none;
-}
-
-.delete-button:hover,
-.action-button:hover {
-    background-color: #f55858;
 }
 
 .back-to-dashboard {

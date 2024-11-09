@@ -109,6 +109,7 @@ const Navbar = () => {
                                 {user.admin && (
                                     <li><Link to="/admin" onClick={toggleMenu}>Admin</Link></li>
                                 )}
+                                <li><Link to={`/`} onClick={toggleMenu}>Home</Link></li>
                                 <li><Link to={`/account`} onClick={toggleMenu}>Account</Link></li>
                                 <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
                                 <li><Link to="/lab" onClick={toggleMenu}>Pixel Lab</Link></li>

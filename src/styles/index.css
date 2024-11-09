@@ -28,6 +28,74 @@
   background-color: #333; /* Darker background on hover */
 }
 
+.confirm-button {
+  background-color: rgb(78, 80, 232);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  flex: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.are-you-sure-confirm {
+  color: blue;
+  margin-bottom: -1rem;
+  margin-top: 1rem;
+}
+
+.confirm-button:hover {
+  background-color: rgb(109, 111, 245);
+}
+
+.edit-button {
+  font-family: "Tomorrow", sans-serif;
+  background-color: #FFD700;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.are-you-sure-delete {
+  color: rgb(224, 22, 22);
+  margin-bottom: -1rem;
+  margin-top: 1rem;
+}
+
+.delete-button {
+  background-color: rgb(224, 22, 22);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  flex: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.delete-button:hover {
+  background-color: #f55858;
+}
 /* .header {
   display: flex;
   justify-content: center;
@@ -287,82 +355,3 @@
   margin-right: 0;
 }
 
-.confirm-button {
-  background-color: rgb(78, 80, 232);
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 8px;
-  padding: 12px 0;
-  flex: 1;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease;
-  margin: 0 8px;
-  text-decoration: none;
-}
-
-.confirm-button:hover, .action-button:hover {
-  background-color: rgb(109, 111, 245);
-}
-
-
-.edit-button {
-  font-family: "Tomorrow", sans-serif;
-  background-color: #FFD700;
-  border: none;
-  color: black;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-}
-
-.edit-button:hover {
-  transform: scale(1.1);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-}
-
-.delete-button {
-  background-color: rgb(224, 22, 22);
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 8px;
-  padding: 12px 0;
-  flex: 1;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease;
-  margin: 0 8px;
-  text-decoration: none;
-}
-
-.delete-button:hover, .action-button:hover {
-  background-color: rgb(230, 86, 86);
-}
-
-.cancel-button {
-  font-family: "Tomorrow", sans-serif;
-  background-color: #b1b1b1a7;
-  border: none;
-  color: black;
-  padding: 10px 20px;
-  margin: 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-}
-
-.cancel-button:hover {
-  transform: scale(1.1);
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-}
