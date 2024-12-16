@@ -112,7 +112,7 @@ const Navbar = () => {
                                 <li><Link to={`/`} onClick={toggleMenu}>Home</Link></li>
                                 <li><Link to={`/account`} onClick={toggleMenu}>Account</Link></li>
                                 <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
-                                <li><Link to="/lab" onClick={toggleMenu}>Pixel Lab</Link></li>
+                                <li><Link to="/lab" onClick={toggleMenu}>Pixel Lab (styling in progress)</Link></li>
                                 <li><Link to="/pound" onClick={toggleMenu}>Pixel Pound</Link></li>
                                 <li><Link onClick={handleLogout}>Logout</Link></li>
                             </>
