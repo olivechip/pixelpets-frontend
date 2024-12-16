@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, persistor } from './redux/store';
 
+import './styles/account.css';
 
 const AccountDelete = () => {
     const { user } = useSelector(state => state.user);
-    const [ deleteForm, setDeleteForm ] = useState(false);
-    const [ formData, setFormData ] = useState({ username: "", email: "" });
-    const [ error, setError ] = useState(null);
+    const [deleteForm, setDeleteForm] = useState(false);
+    const [formData, setFormData] = useState({ username: "", email: "" });
+    const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ const AccountDelete = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-    
+
         // clear tokens and persist storage
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
@@ -33,14 +34,14 @@ const AccountDelete = () => {
 
         // delayed redirect to home
         setTimeout(() => {
-            navigate('/', { state: { message: `Your account has been deleted.` }});
+            navigate('/', { state: { message: `Your account has been deleted.` } });
         }, 100);
     };
 
     const showDeleteForm = () => {
         setDeleteForm(true);
     }
-    
+
     const handleDeletion = async (e) => {
         e.preventDefault();
         setError(null);
@@ -63,7 +64,7 @@ const AccountDelete = () => {
                 })
             });
 
-            if (response.ok){
+            if (response.ok) {
                 handleLogout();
 
             } else {
@@ -76,57 +77,60 @@ const AccountDelete = () => {
             setError('An error occurred during deletion. Please try again later.');
         }
     }
-    
-    return (
-        <div>
-            <div className="header">
-                <div className="button-container-left">
-                    <button onClick={() => navigate(-1)}>Back</button>
-                </div>
-                <h1>Delete Account</h1>
-            </div>
 
-            {user && (
-                <div>
-                    {error && <div className="error">{error}</div>}
-                    <p>Account deletion is irreversible. Pets will be sent to the pound.</p>
-                    {!deleteForm ? (
-                        <button className="delete-button" onClick={showDeleteForm}>Continue</button>
-                    ) : (
-                        <form className="user-form" onSubmit={handleDeletion}>
-                            <label htmlFor="username">Username: </label>
-                            <input
-                                name="username"
-                                type="text"
-                                value={formData.username}
-                                onChange={handleChange}
-                                placeholder="username"
-                                required
-                            />
-                            <br />
-                            <label htmlFor="email">Email Address: </label>
-                            <input
-                                name="email"
-                                type="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder='email'
-                                required 
-                            />
-                            <br />
-                            <label htmlFor="password">Password:</label>
-                            <input 
-                                name="password" 
-                                type="password" 
-                                placeholder='password' 
-                                required 
-                            />
-                            <br />
-                            <button className="delete-button" type="submit">Confirm Deletion</button>
-                        </form>
-                    )}
+    return (
+        <div className="login-container">
+            <div className="login-white-background">
+                <div className="header">
+                    <h2>Delete Account</h2>
                 </div>
-            )}
+
+                {user && (
+                    <div>
+                        {error && <div className="error">{error}</div>}
+                        <p>Account deletion is irreversible. Pets will be sent to the pound.</p>
+                        {!deleteForm ? (
+                            <button className="login-button" onClick={showDeleteForm}>I understand</button>
+                        ) : (
+                            <form className="user-form" onSubmit={handleDeletion}>
+                                <label className="label" htmlFor="username">Username</label>
+                                <input
+                                    className="input"
+                                    name="username"
+                                    type="text"
+                                    value={formData.username}
+                                    onChange={handleChange}
+                                    placeholder="username"
+                                    required
+                                />
+                                <label className="label" htmlFor="email">Email Address</label>
+                                <input
+                                    className="input"
+                                    name="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder='email'
+                                    required
+                                />
+                                <label className="label" htmlFor="password">Password</label>
+                                <input
+                                    className="input"
+                                    name="password"
+                                    type="password"
+                                    placeholder='password'
+                                    required
+                                />
+                                <button type="submit" className="account-delete-button">Confirm Deletion</button>
+                            </form>
+                        )}
+                        <br />
+                    </div>
+                )}
+            </div>
+            <div className="back-link">
+                <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+            </div>
         </div>
     );
 }

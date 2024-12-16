@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { update } from './redux/store';
 import { validateUsername, validateEmail, validatePassword } from './helpers/validationUtils';
 
+import './styles/account.css';
+
 const AccountEdit = () => {
     const { user } = useSelector(state => state.user);
     const [formData, setFormData] = useState({
@@ -42,11 +44,11 @@ const AccountEdit = () => {
             setError(emailError);
             return;
         }
-        if (newPassword) { 
+        if (newPassword) {
             const passwordError = validatePassword(newPassword, confirmPassword);
             if (passwordError) {
-              setError(passwordError);
-              return;
+                setError(passwordError);
+                return;
             }
         }
 
@@ -60,7 +62,7 @@ const AccountEdit = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    ...formData, 
+                    ...formData,
                     newPassword: newPassword !== "" ? newPassword : undefined,
                     currentPassword
                 })
@@ -71,7 +73,7 @@ const AccountEdit = () => {
                 console.log('Profile updated successfully:', updatedUser);
 
                 dispatch(update(updatedUser));
-                navigate(`/account`, { state: { message: `Your account has been updated.` }});
+                navigate(`/account`, { state: { message: `Your account has been updated.` } });
             } else {
                 const errorData = await response.json();
                 console.error('Profile update failed:', errorData.error);
@@ -84,71 +86,68 @@ const AccountEdit = () => {
     };
 
     return (
-        <div>
-            <div className="header">
-                <div className="button-container-left">
-                    <button onClick={() => navigate(-1)}>Back</button>
+        <div className="login-container">
+            <div className="login-white-background">
+                <div className="header">
+                    <h2>Edit Account</h2>
                 </div>
-                <h1>Edit Account Details</h1>
-            </div>
 
-            <div>
                 {error && <div className="error">{error}</div>}
                 <form className="user-form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
+                    <label className="label" htmlFor="username">Username</label>
                     <input
+                        className="input"
                         name="username"
                         type="text"
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder="username"
                         autoComplete="username"
                         required
                         minLength="3"
                         maxLength="50"
                     />
-                    <br />
-                    <label htmlFor="email">Email Address:</label>
+                    <label className="label" htmlFor="email">Email Address</label>
                     <input
+                        className="input"
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="email"
                         autoComplete="email"
                         required
                         maxLength="255"
                     />
-                    <br />
-                    <label htmlFor="newPassword">New Password:</label>
+                    <label className="label" htmlFor="newPassword">New Password</label>
                     <input
+                        className="input"
                         name="newPassword"
                         type="password"
-                        placeholder="new password"
                         autoComplete="new-password"
-                        minLength="8" 
+                        minLength="8"
                     />
-                    <br />
-                    <label htmlFor="confirmPassword">Confirm New Password:</label>
+                    <label className="label" htmlFor="confirmPassword">Confirm New Password</label>
                     <input
+                        className="input"
                         name="confirmPassword"
                         type="password"
-                        placeholder="confirm new password"
                         autoComplete="new-password"
-                        minLength="8" 
+                        minLength="8"
                     />
-                    <br />
-                    <label htmlFor="currentPassword">Current Password:</label>
+                    <label className="label" htmlFor="currentPassword">Current Password</label>
                     <input
+                        className="input"
                         name="currentPassword"
                         type="password"
-                        placeholder="current password"
                         autoComplete="current-password"
                         required
                     />
-                    <br />
-                    <button type="submit">Submit</button>
+                    <button type="submit" className="login-button">Update</button>
                 </form>
+
+                <br />
+            </div>
+            <div className="back-link">
+                <button className="back-button" onClick={() => navigate(-1)}>Back</button>
             </div>
         </div>
     );

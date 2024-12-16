@@ -1,0 +1,71 @@
+.account-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.account-white-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.account-message {
+    color: red;
+    font-style: italic;
+}
+
+.account-message-update {
+    color: #5471f6;
+    font-style: italic;
+}
+
+.account-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 800px;
+    gap: 16px;
+}
+
+.account-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    flex: 1;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.account-button:hover {
+    background-color: #333;
+}
+
+.account-delete-button {
+    background-color: rgb(224, 22, 22);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.account-delete-button:hover {
+    background-color: #f55858;
+}
